@@ -57,12 +57,12 @@
         label=""
         single-line
         variant="outlined"
-        :value="modelValue"
-         @input="$emit('update:modelValue', $event.target.value)"
+        
+        
          v-model="cliente"
       ></v-text-field>
 
-      {{cliente}}
+     
 
       <v-btn
         :disabled="loading"
@@ -73,7 +73,7 @@
         size="x-large"
         variant="flat"
         @click="loading = !loading"
-        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0ACorte:%20' + corte.title + '%20Dia%2007/05/2023%0ANome:%20Pedrinho' "
+        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0ACorte:%20' + corte.title + '%0A%0ADia%2007/05/2023%0ANome:%20' + cliente "
       >
         Confirmar
       </v-btn>
@@ -105,10 +105,11 @@
         { title: 'Sobrancelha' },
       ],
       corte: [
-                { title: 'Social', valor: 20, }
+                { title: 'Social', valor: 20}
                 ],
       props: ['modelValue'],
-      emits: ['update:modelValue']
+      emits: ['update:modelValue'],
+      cliente: 'Cliente'
     }),
 
     methods: {
