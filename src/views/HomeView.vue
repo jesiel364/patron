@@ -10,7 +10,7 @@
   <v-container>
     <v-row>
       <v-col v-for="item in itens" :key="item.id" cols="6" md="3">
-        <v-card href="https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!">
+        <v-card :to="{path: '/agendar'}">
           <v-img :src="item.imagem" height="200"></v-img>
           <v-card-title>{{ item.titulo }}</v-card-title>
           <!-- <v-card-text>{{ item.descricao }}</v-card-text> -->
@@ -64,14 +64,3 @@ export default {
 
 </script>
 
-<style scope>
-  #logo{
-    
-/*    justify-content: center;*/
-  }
-
-  container{
-/*    display: flex;*/
-    background-color: blue;
-  }
-</style>
