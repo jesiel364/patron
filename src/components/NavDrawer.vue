@@ -24,12 +24,14 @@
         </v-list>
       </v-navigation-drawer>
       <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
+       <v-btn @click="drawer = !drawer" icon>
+        <!-- <v-icon>mdi-razor-double-edge</v-icon> -->
+        <v-icon>mdi-content-cut</v-icon>
+      </v-btn>
 
       <v-toolbar-title>Yda Jean Barber</v-toolbar-title>
-     <!--  <v-btn :to="{path: '/'}" icon>
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn> -->
+     
     </v-app-bar>
 </template>
 
