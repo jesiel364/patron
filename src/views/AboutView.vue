@@ -1,15 +1,32 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <v-select
+      v-model="selectedItems"
+      :items="items"
+     :iteitem-text="item.id"
+      :item-value="id"
+      label="name"
+      multiple
+    ></v-select>
+    
+    <v-card-subtext v-for="item in selectedItems" >
+      {{item.name}}
+    </v-card-subtext>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+<script>
+export default {
+  data() {
+    return {
+      items: [
+        { id: 1, name: "Item 1" },
+        { id: 2, name: "Item 2" },
+        { id: 3, name: "Item 3" },
+        { id: 4, name: "Item 4" }
+      ],
+      selectedItems: []
+    };
   }
-}
-</style>
+};
+</script>

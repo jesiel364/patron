@@ -7,7 +7,10 @@
 <NavDrawer />
 
     <v-main>
-      <RouterView />
+     <router-view>
+       
+       
+     </router-view>
     </v-main>
 
 
