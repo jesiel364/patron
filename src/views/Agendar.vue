@@ -23,16 +23,16 @@
       <strong>Domingo</strong> - das 8h às 19h <br>
 
     </v-card-text>
-  
+<div class="ms-3 me-3">  
 <v-select label="Selecione o serviço" v-model="corte" :items="items" multiple>
   <!--<v-option v-for="item in items" :value="item">{{ item.title}} - R${{ item.valor}},00</v-option>-->
   
    
 </v-select>
-<v-card-text v-for="i in corte" class="mt-2 mb-1">
+<!-- <v-card-text v-for="i in corte" class="mt-2 mb-1">
       {{i}}
       
-    </v-card-text>
+    </v-card-text> -->
     
 
   
@@ -43,9 +43,9 @@
       <VueDatePicker  class="mb-2 mt-2" locale="pt-BR" v-model="date" week-numbers="iso" 
     ></VueDatePicker>
     
-    {{dateF}}
-    
 
+    
+</div>
     <v-card-text>
       <div class="text-subtitle-2 font-weight-black mb-1">Seu nome</div>
 
