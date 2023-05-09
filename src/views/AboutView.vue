@@ -1,5 +1,5 @@
 <template>
-  <v-container class='' theme='light' id='container'>
+  <v-container class='p-0 m-0' theme='light' id='container'>
     <div class="mx-auto" id="frame">
     <v-card-text class='' id='title' theme='light'>
    <h1>   Yda Jean BarberShop </h1> 
@@ -53,13 +53,14 @@ export default {
 
 
   @import url('https://fonts.googleapis.com/css2?family=Karantina:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 
 
 #container {
     width: 100%;
     height: 100%;
-/*    position: absolute;*/
+    position: absolute;
     top: 0;
     left: 0;
     
@@ -67,6 +68,8 @@ export default {
     background-size: cover;
     background-color: red;
     transform: scale(1.1);
+    margin: 0;
+    padding: 0;
 
   }
 
