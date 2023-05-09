@@ -8,7 +8,7 @@
    <p id='text'>Na YDA JEAN Barbershop, oferecemos uma vasta gama de serviços profissionais de corte de cabelo e de cuidados de beleza para homens. Os nossos barbeiros experientes utilizam as mais recentes técnicas e ferramentas para lhe dar o visual perfeito. Quer necessite de um corte de cabelo clássico, de um corte de barba a direito ou de um corte de barba, temos tudo o que precisa.</p><br>
 
    <div class="" id='bt-div'>
-   <v-btn class='mx-auto' id='bt'>ver serviços</v-btn>
+   <v-btn to="/servicos" class='mx-auto' id='bt'>ver serviços</v-btn>
  </div>
 
 
@@ -17,7 +17,7 @@
 
   <v-row align="center mx-2" justify="left">
       <v-col cols="auto">
-        <v-btn theme='dark' density="compact" icon="mdi-instagram"></v-btn>
+        <v-btn href="https://instagram.com/ydajean?igshid=NTc4MTIwNjQ2YQ==" theme='dark' density="compact" icon="mdi-instagram"></v-btn>
       </v-col><v-col cols="auto">
         <v-btn theme='dark' density="compact" icon="mdi-facebook"></v-btn>
       </v-col>
