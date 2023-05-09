@@ -1,5 +1,5 @@
 <template>
-  <v-container class='p-0 m-0' theme='light' id='container'>
+  <v-container class='' theme='light' id='container'>
     <div class="mx-auto" id="frame">
     <v-card-text class='' id='title' theme='light'>
    <h1>   Yda Jean BarberShop </h1> 
@@ -60,7 +60,7 @@ export default {
 #container {
     width: 100%;
     height: 100%;
-    position: absolute;
+/*    position: absolute;*/
     top: 0;
     left: 0;
     
@@ -178,7 +178,7 @@ background: #977656;
 #frame{
 /*  background-color: red;*/
   margin: 20px;
-  max-width: 400px;
+  max-width: 380px;
   height: 100%;
   
 }
