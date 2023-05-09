@@ -77,7 +77,7 @@ export default {
   
 
   width: 100%;
-  height: 81px;
+
 
 /* H1 */
 /*background-color: RED;*/
@@ -85,7 +85,7 @@ export default {
 font-family: 'Karantina';
 font-style: normal;
 font-weight: 700;
-font-size: 43px;
+font-size: 34px;
 /*line-height: 65px;*/
 /* identical to box height */
 
@@ -112,7 +112,7 @@ height: 81px;
 font-family: 'Karantina';
 font-style: normal;
 font-weight: 400;
-font-size: 30px;
+font-size: 26px;
 line-height: 34px;
 /* identical to box height */
 letter-spacing: 0.001em;
@@ -139,7 +139,7 @@ text-align: center;
 /*height: 160px;*/
   /* 16 Regular */
 
-font-family: 'Inter';
+font-family: 'Inter', serif;
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
@@ -178,9 +178,10 @@ background: #977656;
 #frame{
 /*  background-color: red;*/
   margin: 20px;
-  max-width: 380px;
+  max-width: 75%;
   height: 100%;
   
+
 }
 </style>
 
