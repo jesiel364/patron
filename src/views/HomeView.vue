@@ -1,5 +1,5 @@
 <template>
-
+<div id='cont'>
   <container>
   <div>
     <logoComp class='text-center' id='logo' />
@@ -10,7 +10,7 @@
   <v-container>
     <v-row>
       <v-col v-for="item in itens" :key="item.id" cols="6" md="3">
-        <v-card to="/agendar"  @click="">
+        <v-card theme="light" to="/agendar"  @click="">
           <v-img :src="item.imagem" height="200"></v-img>
           <v-card-title>{{ item.titulo }}</v-card-title>
           <v-card-subtitle>R${{ item.valor }},00</v-card-subtitle>
@@ -20,7 +20,7 @@
     </v-row>
   </v-container>
 
-
+</div>
 </template>
 
 <script>
@@ -36,32 +36,47 @@ export default {
       itens: [
         {
           id: 1,
-          titulo: 'Social',
-          valor: 20,
+          titulo: 'Militar',
+          valor: 12,
           descricao: 'Descrição do Item 1',
           imagem: 'https://i.pinimg.com/564x/52/76/df/5276dfd89d7f9a674f56c28eb1abe2e0.jpg',
         },
         {
           id: 2,
-          titulo: 'Degradê',
-          valor: 25,
+          titulo: 'Social',
+          valor: 15,
           descricao: 'Descrição do Item 2',
           imagem: 'https://i.pinimg.com/564x/b4/1f/f2/b41ff2d4bb920f1545d72292a918f6d8.jpg',
         },
         {
           id: 3,
-          titulo: 'Colorir',
+          titulo: 'Degradê Máquina',
           descricao: 'Descrição do Item 3',
-          valor: 50,
+          valor: 20,
           imagem: 'https://www.ocarafashion.com/wp-content/uploads/2021/05/cabelo-colorido-masculino-men-color-hair-style.jpg',
         },
         {
           id: 4,
+          titulo: 'Degradê Navalha',
+          valor: 25,
+          descricao: 'Descrição do Item 4',
+          imagem: 'https://thumbs.dreamstime.com/b/sobrancelha-dada-forma-perfeitamente-composi%C3%A7%C3%A3o-permanente-e-tattooing-cosm%C3%A9tico-para-as-sobrancelhas-126169103.jpg',
+        },
+        {
+          id: 5,
           titulo: 'Sobrancelha',
           valor: 10,
           descricao: 'Descrição do Item 4',
           imagem: 'https://thumbs.dreamstime.com/b/sobrancelha-dada-forma-perfeitamente-composi%C3%A7%C3%A3o-permanente-e-tattooing-cosm%C3%A9tico-para-as-sobrancelhas-126169103.jpg',
         },
+        {
+          id: 6,
+          titulo: 'Barba',
+          valor: 5,
+          descricao: 'Descrição do Item 4',
+          imagem: 'https://thumbs.dreamstime.com/b/sobrancelha-dada-forma-perfeitamente-composi%C3%A7%C3%A3o-permanente-e-tattooing-cosm%C3%A9tico-para-as-sobrancelhas-126169103.jpg',
+        },
+        
       ],
       
       
@@ -86,3 +101,5 @@ export default {
 
 </script>
 
+<style scoped>
+</style>
