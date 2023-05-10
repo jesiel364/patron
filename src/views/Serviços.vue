@@ -1,21 +1,22 @@
 <template>
   <div class="container mx-auto mt-0">
-
+ 
   <v-card class='' id='img-card'>
   </v-card>
-  <v-card id="content" class="mx-auto pt-4">
+  
     
-  <div class="mb-8">
-    <div id="perfil">
-      <!-- <v-img
-  :width="300"
-  aspect-ratio="16/9"
-  cover
-  src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-></v-img> -->
-      <v-card-title>Yda Jean Barber</v-card-title>
+       <div class="" id="perfil">
+    <logo_small class='text-center mb-5' id='logo' />
+    <div>
+    <p class="font-weight-bold" id="perfil-name">Yda Jean Barbershop</p>
+    <p class="text-subtitle-1" id="perfil-desc">Rua Curió, 575, São Bento</p>
+     </div>
     </div>
-    
+  <v-card id="content" class="mx-auto mt-7 pt-9">
+   
+  <div class="mb-8">
+   
+   
   </div>
   <!-- <v-card
     class="mx-auto"
@@ -27,9 +28,10 @@
       item-value="id"
     ></v-list>
   </v-card> -->
-  <p id="thead" class="font-weight-black ml-3">Serviços</p>
+  
+  <p id="thead" class="font-weight-black pt-7 mt-9 ml-3">Serviços</p>
 
-  <div v-for="item in items" :key="id" id="container" class="mt-3 ml-4 pb-3">
+  <div v-for="item in items" :key="id" id="container" class="mt-3 ml-4 mb-1 pb-0">
   
   <div id="cont-1">
     
@@ -39,20 +41,29 @@
     
     <div  id="cont-2">
       <p id="valor" class="font-weight-bold">R${{ item.valor }},00</p>
-      <v-btn class="ml-8 mr-8 mt-1 rounded-pill bg-brown">confirmar</v-btn>
+      <v-btn class="ml-8 mr-3 mt-1 rounded-pill bg-brown">confirmar</v-btn>
       
   
   </div>
 </div>
+
     
     
   </v-card>
-  
-</div>
+  </div>
 </template>
 
 <script>
+//import Vue from 'vue';
+//import { bus } from './assets/bus';
+import logo_small from '../components/logo_sm.vue'
+
   export default {
+    components: {
+
+    logo_small,
+
+  },
     data: () => ({
       items: [
         {
@@ -101,8 +112,16 @@
 
 
 <style scoped>
+html, body{
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 #container{
-  /* background-color:grey; */
+  /*background-color:grey; */
   display: flex;
   justify-content: space-between;
   border-radius: 22px;
@@ -121,6 +140,7 @@
   
   /* background-color: green; */
 vertical-align: middle;
+margin-bottom: 0px ;
 }
 
 #cont-2{
@@ -135,6 +155,7 @@ vertical-align: middle;
   /* line-height: 3; */
   display: flex;
   margin-top: 10px;
+  
 }
 
 v-btn{
@@ -153,6 +174,7 @@ v-btn{
 
 #time{
   /* background-color: green; */
+  line-height: 5px;
 }
 
 #thead{
@@ -162,9 +184,9 @@ v-btn{
 
 #img-card{
     /* max-width: 100%; */
-    height: 1200px;
+   
  
-    
+    height: 400px;
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;
     background-size: cover;
     background-color: red;
@@ -172,17 +194,48 @@ v-btn{
 }
 
 #content{
-  /* background-color: green; */
+  /*background-color: #e1e1e1; */
   position: absolute;
-  top: 300px;
+  top: 200px;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
   max-width: 380px;
   min-width: 200px;
-  height: auto;
+  display: flex;
+  flex-direction: column;
   border-top-left-radius: 45px;
 }
 
+#perfil{
+  height: 100px;
+    /*background-color: red;*/
+  width: 400px;
+  position: absolute;
+  left: 0;
+  right: -80px;
+  top: 130px;
+  z-index: 10;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-items: space-between;
+}
+
+
+
+#perfil-name{
+  margin-top: 110px;
+  margin-left: 20px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif; 
+  text-transform: uppercase;
+}
+#perfil-desc{
+  
+  margin-left: 20px;
+  font-size: 14px;
+  
+}
 </style>
