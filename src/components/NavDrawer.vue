@@ -2,7 +2,7 @@
     <v-navigation-drawer v-model="drawer"
         
         
-        theme="light"
+        theme="dark"
       ><v-list>
           <v-list-item
           
@@ -30,7 +30,7 @@
         <v-icon>mdi-content-cut</v-icon>
       </v-btn>
 
-      <v-toolbar-title class="text-subtitle-8 font-weight-black">Yda Jean Barber</v-toolbar-title>
+      <!-- <v-toolbar-title class="text-subtitle-8 font-weight-black">Yda Jean Barber</v-toolbar-title> -->
      
     </v-app-bar>
 </template>

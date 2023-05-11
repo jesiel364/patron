@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
   #logo{
-    height: 140px;
+    height: 220px;
     border-radius: 10%;
     
 
