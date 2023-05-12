@@ -4,7 +4,7 @@
     elevation="1"
     max-width="500"
   >
-    <v-card-title class="py-5 text-center font-weight-black">Agende seu corte de cabelo aqui</v-card-title>
+    <v-card-title class="py-5 text-center font-weight-black">{{ store.myObject.titulo }}</v-card-title>
 
       <div class="text-center">
     <img  id='logo' :src="Logo" alt="Logo do meu aplicativo">
@@ -95,12 +95,18 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
  import moment from 'moment';
+ import { userConfig } from '@/stores/user'
 
 
 
 
 
   export default {
+    setup() {
+    const store = userConfig()
+    return { store }
+    }
+    ,
     data: () => ({
       loading: false,
       Logo: Logo,
