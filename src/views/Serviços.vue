@@ -5,13 +5,13 @@
 
 
       <v-card id="content" class="mx-auto mt-5 ">
-        <div class="" id="perfil">
-          <logo_small class='text-center mb-5' id='logo' />
-          <div id="perfil-desc">
+        <div class="divs">
+  <div class="box"> <logo_small class='text-center mb-5' id='logo' /></div>
+  <div class="box"><div id="perfil-desc">
             <p class="font-weight-bold" id="perfil-name">Yda Jean Barbershop</p>
             <p class="" id="perfil-rua">Rua Curió, 575, São Bento</p>
-          </div>
-        </div>
+          </div></div>
+</div>
 
         <p id="thead" class="font-weight-black mb-7">Serviços</p>
 
@@ -31,28 +31,28 @@
           </div>
         </div>
 
-        <div class="message bg-brown">
-          <div>
-            <span id="author">{{ message.author }}</span>
-            <span id="date">{{ message.date }}</span>
-          </div>
-
-          <div>
-            <p id="mess">{{ message.mess }}</p>
-          </div>
-
-        </div>
-
+        
+<messComp :dict="message" />
 
 
       </v-card>
+ 
+ 
+      
     </div>
   </div>
+  
+  
+
+
+
+
 </template>
 
 <script>
 import { userConfig } from '@/stores/user'
 import logo_small from '../components/logo_sm.vue'
+import messComp from '../components/messComp.vue'
 
 export default {
 
@@ -79,6 +79,7 @@ export default {
   components: {
 
     logo_small,
+    messComp
 
   },
   data: () => ({
@@ -146,30 +147,34 @@ export default {
 }
 </script>
 
- 
-
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap');
 
-html,
-body,
-.wrapper,
-.containner {
-  width: 100%;
-  max-width: 100vw;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-
-}
-
-body {}
+  .box {
+      /*background-color: blue;*/
+   
+    width: 100%;
+    height: 150px;
+    justify-content: center;
+  }
+  
+  .divs{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+  }
 
 .wrapper {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../src/assets/jason-leung-2seUdPQNy_I-unsplash.jpg') no-repeat center center;
-  /* background-size: cover; */
+    background-size: cover;
+align-items: center;
+  display: flex;
   background-color: red;
+align-items: center;
+  transform: scale(1.1);
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
 }
 
 #perfil-rua,
@@ -188,19 +193,22 @@ p {
 }
 
 #content {
-  padding: 16px;
+  padding: 36px;
   justify-content: center;
   width: 700px;
   /* height: 600px; */
   display: flex;
   flex-direction: column;
   border-top-left-radius: 45px;
-
+ 
+  
 }
 
 .container {
-  padding: 10px;
-
+ 
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -260,7 +268,7 @@ v-btn {
 
   margin: auto;
   display: flex;
-  flex-direction: row;
+  
   justify-items: space-between;
   align-items: center;
 }
@@ -268,7 +276,7 @@ v-btn {
 
 
 #perfil-desc p {
-
+ 
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
   line-height: 20px;
@@ -291,48 +299,38 @@ v-btn {
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-
+  
 }
 
-.message {
-  /* background-color: brown; */
-  margin-top: 42px;
-  padding: 16px;
-  border-radius: 25px;
-}
 
-.message p {
-  /* color: #fefefe; */
-}
-
-#author {
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fefefe;
-}
-
-#date {
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  font-weight: 200;
-  color: #dfdfdf;
-  padding-left: 16px;
-}
-
-#mess {
-  /* font-family: 'Lato', sans-serif; */
-  font-size: 14px;
-  font-weight: 200;
-  color: #fefefe;
-  padding-top: 10px;
-}
 
 @media(max-width: 800px) {
   #content {
     min-width: 100px;
-    width: 380px;
+    width: 100%;
   }
+  
+  .wrapper{
+    
+    width: 100%;
+  }
+  
+    .divs{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .box{
+    margin-top: 30px;
+    
+}
 
+#perfil-desc{
+  margin-top: 20px;
+  justify-content: center;
+    text-align: center;
+    line-height: .5;
+    /*background-color: red;*/
+}
 }
 </style>

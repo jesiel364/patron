@@ -30,8 +30,17 @@
             <p id='corte'>{{ store.myObject.titulo }}</p>
             <p id='time'>{{ store.myObject.time }}min</p>
           </div>
+          
+          
 
         </div>
+        
+        <div class="mx-auto text-center">
+        
+<VueDatePicker class="mb-2 mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
+
+<v-btn class="mt-auto mb-0">Confirmar</v-btn>
+</div>
 
 
         <!-- 
@@ -67,9 +76,7 @@
 
 
 
-            <VueDatePicker class="mb-2 mt-2" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
-
-
+            
 
           </div>
           <v-card-text>
@@ -164,21 +171,25 @@ html {}
   transform: scale(1.1);
   width: 100%;
   max-width: 100vw;
+  height: 100%;
   /* height: 100vw; */
-  padding: 0;
+ 
   display: flex;
+  align-items: center;
 }
 
 .wrapper {
   background-color: #795548;
-  width: 400px;
+  width: 500px;
+  height: 500px;
   margin: auto;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  
   margin-top: 80px;
   margin-bottom: 80px;
   border-radius: 10px;
+/*opacity: 0.9;*/
 }
 
 .form {
@@ -189,6 +200,7 @@ html {}
   padding: 20px;
   /* margin-top: 64px; */
   height: 100%;
+ 
 }
 
 h2 {
@@ -262,5 +274,14 @@ h2 {
   flex-direction: column;
   padding-left: 10px;
   width: 100px;
+}
+
+@media(max-width: 700px){
+  .wrapper{
+   margin: 30px;
+    min-width: 100px;
+    
+    
+}
 }
 </style>

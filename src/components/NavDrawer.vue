@@ -23,7 +23,7 @@
           <v-list-item prepend-icon=" mdi-cog" :to="{path: '/config'}" title="Configurações"></v-list-item> -->
         </v-list>
       </v-navigation-drawer>
-      <v-app-bar>
+      <v-app-bar color="brown">
       <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
        <v-btn @click="drawer = !drawer" icon>
         <!-- <v-icon>mdi-razor-double-edge</v-icon> -->

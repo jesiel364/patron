@@ -13,7 +13,7 @@
 
 
 </v-card-text>
-
+<messComp class="mx-2 mb-3" :dict="message" />
 
   <v-row align="center mx-2" justify="left">
       <v-col cols="auto">
@@ -24,6 +24,8 @@
 
      
     </v-row>
+    
+    
    </div>
   
     
@@ -34,7 +36,12 @@
 </template>
 
 <script>
+import messComp from '../components/messComp.vue'
+
 export default {
+  components: {
+    messComp
+  },
   data() {
     return {
       items: [
@@ -43,7 +50,14 @@ export default {
         { id: 3, name: "Item 3" },
         { id: 4, name: "Item 4" }
       ],
-      selectedItems: []
+      selectedItems: [],
+      message: {
+
+      author: 'Jean Pierre',
+      date: '10, Mai 2023',
+      mess: 'Funcionamos todos os dias das 8h ás 19h!'
+
+    }
     };
   }
 };
@@ -55,22 +69,16 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Karantina:wght@700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-
-
 #container {
     width: 100%;
     height: 100%;
-/*    position: absolute;*/
-    top: 0;
-    left: 0;
     
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;
     background-size: cover;
     background-color: red;
     transform: scale(1.1);
-    margin: 0;
-    padding: 0;
-
+    display: flex;
+    align-items: center;
   }
 
 #title h1{
@@ -178,7 +186,7 @@ background: #977656;
 #frame{
 /*  background-color: red;*/
   margin: 20px;
-  max-width: 75%;
+ 
   height: 100%;
   
 
