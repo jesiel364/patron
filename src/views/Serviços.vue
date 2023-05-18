@@ -76,7 +76,7 @@ export default {
 
 
   
-    methods: {
+    method: {
       define(data) {
         const newObj = {
           id: 1,
