@@ -25,6 +25,8 @@
      
     </v-row>
     
+    <router-link :to="{ name: 'user', params: { id: 123 }}">Link para o usuário</router-link>
+
     
    </div>
   

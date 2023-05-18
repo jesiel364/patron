@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/agendar/',
+      path: '/agendar/:id',
       name: 'agendar',
       component: () => import('../views/Agendar.vue')
     },
@@ -25,6 +25,13 @@ const router = createRouter({
 
       name: 'servicos',
       component: () => import('../views/Serviços.vue')
+    },
+    {
+
+      path: '/user/:id',
+
+      name: 'user',
+      component: () => import('../components/UserComponent.vue')
     },
   ]
 })

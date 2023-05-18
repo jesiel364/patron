@@ -10,6 +10,8 @@ export const userConfig = defineStore({
     actions: {
       setMyObject(newObject) {
         this.myObject = newObject
-      }
+      },
+
+     
     }
   })

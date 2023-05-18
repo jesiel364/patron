@@ -7,7 +7,7 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import { firestorePlugin } from 'vuefire'
 import { createPinia } from 'pinia'
 
 const app = createApp(App)
@@ -27,5 +27,6 @@ app.component('VueDatePicker', VueDatePicker);
 
 app.use(router).use(vuetify)
 app.use(createPinia())
+app.use(firestorePlugin)
 
 app.mount('#app')

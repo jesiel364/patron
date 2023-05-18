@@ -17,7 +17,7 @@
           </div>
 
           <div id='price'>
-            <p>R${{ store.myObject.valor }},00</p>
+            <p>R${{ corte }},00</p>
           </div>
 
         </div>
@@ -27,20 +27,21 @@
             <v-img cover :src="store.myObject.imagem"></v-img>
           </v-avatar>
           <div id="info">
-            <p id='corte'>{{ store.myObject.titulo }}</p>
-            <p id='time'>{{ store.myObject.time }}min</p>
+            <p id='corte'>{{ corte }}</p>
+            <p id='time'>{{ corte }}min</p>
           </div>
-          
-          
+
+
 
         </div>
-        
-        <div class="mx-auto text-center">
-        
-<VueDatePicker class="mb-2 mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
 
-<v-btn class="mt-auto mb-0">Confirmar</v-btn>
-</div>
+        <div class="mx-auto text-center">
+
+          <VueDatePicker class="mb-2 mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
+
+          <v-btn class="mt-auto mb-0">Confirmar</v-btn>
+          <!-- <button :click="filterObjectById(2)">Filtrar por ID</button> -->
+        </div>
 
 
         <!-- 
@@ -110,17 +111,30 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment';
 import { userConfig } from '@/stores/user'
+import servicos from "../firebase";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+} from "firebase/firestore";
 
 
+const store = userConfig()
 
 
 
 export default {
   setup() {
     const store = userConfig()
+
     return { store }
-  }
-  ,
+  },
+
+
+
+
   data: () => ({
     loading: false,
     Logo: Logo,
@@ -138,6 +152,29 @@ export default {
 
   })
   ,
+
+  methods: {
+
+
+    const getFirestoreData = async () => {
+      const querySnapshot = await getDocs(servicos);
+      querySnapshot.forEach((doc) => console.log(doc.data()))
+  getFirestoreData()
+    },
+
+  
+
+    //  servicos.forEach(obj => {
+    //   if( obj.id === this.$route.params.id ){
+    //     // console.log(obj.titulo)
+
+    //     this.corte = obj
+    //   }
+
+    //  })
+
+  }
+  ,
   computed: {
     dateF() {
 
@@ -152,7 +189,10 @@ export default {
 
       setTimeout(() => (this.loading = false), 2000)
     },
-  },
+
+
+
+  }
 }
 </script>
 
@@ -173,7 +213,7 @@ html {}
   max-width: 100vw;
   height: 100%;
   /* height: 100vw; */
- 
+
   display: flex;
   align-items: center;
 }
@@ -185,11 +225,11 @@ html {}
   margin: auto;
   align-items: center;
   justify-content: center;
-  
+
   margin-top: 80px;
   margin-bottom: 80px;
   border-radius: 10px;
-/*opacity: 0.9;*/
+  /*opacity: 0.9;*/
 }
 
 .form {
@@ -200,7 +240,7 @@ html {}
   padding: 20px;
   /* margin-top: 64px; */
   height: 100%;
- 
+
 }
 
 h2 {
@@ -257,17 +297,17 @@ h2 {
   font-weight: 600;
   font-size: 14px;
   /* font-style: normal; */
- 
+
 }
 
 .div2 #time {
 
   font-weight: 100;
   font-family: 'Noto Sans', sans-serif;
- 
+
 }
 
- #info{
+#info {
   /* background-color: rgb(51, 12, 65); */
 
   display: flex;
@@ -276,12 +316,12 @@ h2 {
   width: 100px;
 }
 
-@media(max-width: 700px){
-  .wrapper{
-   margin: 30px;
+@media(max-width: 700px) {
+  .wrapper {
+    margin: 30px;
     min-width: 100px;
-    
-    
-}
+
+
+  }
 }
 </style>

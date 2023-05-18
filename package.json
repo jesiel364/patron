@@ -13,11 +13,13 @@
     "@mdi/font": "^7.2.96",
     "@popperjs/core": "^2.11.7",
     "@vuepic/vue-datepicker": "^5.0.1",
+    "firebase": "^9.22.0",
     "moment": "^2.29.4",
     "pinia": "^2.0.36",
     "v-calendar": "^3.0.3",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
+    "vuefire": "^3.1.0",
     "vuetify": "^3.2.2"
   },
   "devDependencies": {
