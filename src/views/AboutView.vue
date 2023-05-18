@@ -188,10 +188,41 @@ background: #977656;
 #frame{
 /*  background-color: red;*/
   margin: 20px;
- 
+  width: 600px;
   height: 100%;
   
 
+}
+
+@media(max-width: 800px) {
+  #frame {
+    min-width: 100px;
+    width: 100%;
+    margin: 20px;
+  }
+
+  .wrapper {
+
+    width: 100%;
+  }
+
+  .divs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box {
+    margin-top: 30px;
+
+  }
+
+  #perfil-desc {
+    margin-top: 20px;
+    justify-content: center;
+    text-align: center;
+    line-height: .5;
+    /*background-color: red;*/
+  }
 }
 </style>
 

@@ -1,11 +1,11 @@
 <template>
 
-  <container>
+
   <div>
     <img id='logo' :src="Logo" alt="Logo do meu aplicativo">
   </div>
 
-</container>
+
 
 </template>
 

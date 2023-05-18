@@ -1,7 +1,7 @@
 
 
 <template>
-  <v-app theme="light" id="inspire">
+  <v-app >
 
 
 <NavDrawer />

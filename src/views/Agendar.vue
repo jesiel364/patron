@@ -126,11 +126,11 @@ const store = userConfig()
 
 
 export default {
-  setup() {
-    const store = userConfig()
+  // setup() {
+  //   const store = userConfig()
 
-    return { store }
-  },
+  //   return { store }
+  // },
 
 
 
@@ -156,10 +156,10 @@ export default {
   methods: {
 
 
-    const getFirestoreData = async () => {
-      const querySnapshot = await getDocs(servicos);
-      querySnapshot.forEach((doc) => console.log(doc.data()))
-  getFirestoreData()
+    // const getFirestoreData = async () => {
+    //   const querySnapshot = await getDocs(servicos);
+    //   querySnapshot.forEach((doc) => console.log(doc.data()))
+
     },
 
   
