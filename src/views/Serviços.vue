@@ -4,7 +4,7 @@
     <div class="container">
      
 
-      <v-card id="content" theme='dark' class="">
+      <v-card id="content" theme='dark' class="mx-auto mt-5 ">
         <div class="divs">
           <div class="box">
             <logo_small class='text-center mb-5' id='logo' />
@@ -19,7 +19,7 @@
 
         <p id="thead" class="font-weight-black mb-7">Serviços</p>
 
-        <div v-for="item in servicos" :key="id" class="mb-3 pb-0">
+        <div v-for="item in servicos" :key="id" class="servicos   mb-3 pb-0">
 
           <div id="cont-1">
 
@@ -29,7 +29,7 @@
 
           <div id="cont-2">
             <p id="valor" class="font-weight-bold">R${{ item.valor }},00</p>
-            <v-btn :to="{ name: 'agendar', params: { id: item.id } }" theme="light"
+            <v-btn  theme="light" @click='enviarObjeto({item})'
               class="ml-8 mt-1 rounded-pill bg-brown">confirmar</v-btn>
 
 
@@ -76,7 +76,7 @@ export default {
 
 
   
-    method: {
+    methods: {
       define(data) {
         const newObj = {
           id: 1,
@@ -85,10 +85,13 @@ export default {
           descricao: 'Descrição do Item 1',
           imagem: 'https://i.pinimg.com/564x/52/76/df/5276dfd89d7f9a674f56c28eb1abe2e0.jpg',
         }
-
         this.store.setMyObject(data)
       },
 
+      enviarObjeto(item) {
+      const objeto = { nome: 'Exemplo', idade: 25 }
+      this.$router.push({ name: 'agendar', params: { item: JSON.stringify(item) } })
+    }
      
   }
   ,
@@ -119,8 +122,8 @@ export default {
 .box {
   /*background-color: blue;*/
 
-  width: 100%;
-  height: 150px;
+  /* width: 100%;
+  height: 150px; */
   justify-content: center;
 }
 
@@ -128,6 +131,7 @@ export default {
   display: flex;
   flex-direction: row;
   margin: 20px;
+  
 }
 
 .wrapper {
@@ -277,8 +281,8 @@ v-btn {
   }
 
   .wrapper {
-    margin: 0;
-    /* width: 100vw; */
+
+    width: 100%;
   }
 
   .divs {
@@ -296,7 +300,7 @@ v-btn {
     justify-content: center;
     text-align: center;
     line-height: .5;
-  
+    /*background-color: red;*/
   }
 }
 </style>
