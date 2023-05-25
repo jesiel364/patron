@@ -23,8 +23,8 @@
         </div>
 
         <div class="div2">
-          <v-avatar color="grey" size="150" rounded="">
-            <v-img :src="corte.item.imagem" cover></v-img>
+          <v-avatar color="grey" size="60" rounded="">
+            <v-img  :src="corte.item.imagem" cover></v-img>
           </v-avatar>
           <div id="info">
             <p id='corte'>{{corte.item.titulo}}</p>
@@ -39,10 +39,49 @@
 
           <VueDatePicker class="mb-2 mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
 
-          <v-btn class="mt-auto mb-0">Confirmar</v-btn>
-          <!-- <button :click="filterObjectById(2)">Filtrar por ID</button> -->
+          <br>
+
+       
+
+          <v-text-field
+        label="Seu nome"
+        single-line
+        variant="outlined"
+        class='mt-2'
+        
+         v-model="cliente"
+      ></v-text-field>
+
+<h3 class="mb-2">Confira se está tudo certo</h3>
         </div>
 
+        <v-card
+        class='mt-4 mb-4 pb-2'
+        v-if="cliente && dateF"
+  
+
+>
+  
+  <v-card-title><v-icon  >mdi-content-cut</v-icon>    {{corte.item.titulo}}</v-card-title>
+  <v-card-subtitle><v-icon  >mdi-face-man-shimmer-outline</v-icon>{{cliente}}</v-card-subtitle>
+  <v-card-subtitle><v-icon  >mdi-calendar-range</v-icon>{{dateF}}</v-card-subtitle>
+  <v-card-subtitle><v-icon  >mdi-currency-brl</v-icon>{{corte.item.valor}},00</v-card-subtitle>
+</v-card>
+
+
+      <v-btn
+        :disabled="loading"
+        :loading="loading"
+        block
+        class="text-none mb-4"
+        color="light-3"
+        size="x-large"
+        variant="flat"
+        @click="loading = !loading"
+        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0AServiço:%20' + 'Corte ' + corte.item.titulo + '%0A%0A'+ dateF + '%0A' + cliente "
+      >
+        Confirmar
+      </v-btn>
 
       
       </div>
@@ -56,7 +95,7 @@
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import moment from 'moment';
 import { userConfig } from '@/stores/user'
 import servicos from "../firebase";
 
@@ -71,6 +110,15 @@ export default {
     const store = userConfig()
 
     return { store }
+  },
+
+  computed:{
+    dateF() {
+     if (this.date){
+      return moment(this.date).format("DD/MM/YYYY - hh:mm")
+     }
+     
+   }
   },
 
 
@@ -144,7 +192,7 @@ html {}
 .wrapper {
   background-color: #795548;
   width: 500px;
-  height: 500px;
+/*  height: 500px;*/
   margin: auto;
   align-items: center;
   justify-content: center;
@@ -239,12 +287,20 @@ h2 {
   width: 100px;
 }
 
+#img{
+  height: 45px;
+}
+
 @media(max-width: 700px) {
   .wrapper {
     margin: 30px;
     min-width: 100px;
 
 
+  }
+
+  #container{
+    padding-top: 20px;
   }
 }
 </style>

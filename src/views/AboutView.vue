@@ -1,6 +1,6 @@
 <template>
-  <v-container class='' theme='light' id='container'>
-    <div class="mx-auto" id="frame">
+  <v-container class='' id='container'>
+    <div class="mx-auto mb-0" id="frame">
     <v-card-text class='' id='title' theme='light'>
    <h1>   Yda Jean BarberShop </h1> 
    <h2 class="text-center mt-1" id='sub'>Expert em serviços de barba e cabelo</h2>
@@ -15,7 +15,7 @@
 </v-card-text>
 <messComp class="mx-2 mb-3" :dict="message" />
 
-  <v-row align="center mx-2" justify="left">
+  <v-row align="center px-2" justify="left">
       <v-col cols="auto">
         <v-btn href="https://instagram.com/ydajean?igshid=NTc4MTIwNjQ2YQ==" theme='dark' density="compact" icon="mdi-instagram"></v-btn>
       </v-col><v-col cols="auto">
@@ -25,7 +25,7 @@
      
     </v-row>
     
-    <router-link :to="{ name: 'user', params: { id: 123 }}">Link para o usuário</router-link>
+
 
     
    </div>
@@ -71,17 +71,7 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Karantina:wght@700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-#container {
-    width: 100%;
-    height: 100%;
-    
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;
-    background-size: cover;
-    background-color: red;
-    transform: scale(1.1);
-    display: flex;
-    align-items: center;
-  }
+
 
 #title h1{
   
@@ -161,7 +151,7 @@ text-align: justify;
 
 color: #F2DAC2;
 
-opacity: 0.64;
+opacity: 0.72;
 margin: 0 auto;
 
 }
@@ -188,10 +178,39 @@ background: #977656;
 #frame{
 /*  background-color: red;*/
   margin: 20px;
-  width: 600px;
-  height: 100%;
-  
+  width: 600px; 
+}
 
+@media(min-width: 800px) {
+  #container {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../src/assets/bg1.jpg') no-repeat center center;
+  background-size: cover;
+  align-items: center;
+
+  background-color: red;
+  align-items: center;
+  padding-top: 20PX;
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
+
+  }
+
+  #frame{
+/*  background-color: red;*/
+/*  margin: 0px;*/
+   
+}
+
+  #container{
+     
+    
+/*    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;*/
+    background-size: cover;
+    background-color: red;
+    transform: scale(1.1);
+    align-items: center;
+  }
 }
 
 @media(max-width: 800px) {
@@ -223,6 +242,19 @@ background: #977656;
     line-height: .5;
     /*background-color: red;*/
   }
+
+  #container {
+/*    width: 100%;*/
+    
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/bg1.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: red;
+/*    transform: scale(1.1);*/
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
 }
 </style>
 

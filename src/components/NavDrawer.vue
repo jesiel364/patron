@@ -1,4 +1,5 @@
 <template>
+  <div class="wrapper">
     <v-navigation-drawer v-model="drawer"
         
         
@@ -33,6 +34,7 @@
       <!-- <v-toolbar-title class="text-subtitle-8 font-weight-black">Yda Jean Barber</v-toolbar-title> -->
      
     </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -40,3 +42,9 @@
     data: () => ({ drawer: null }),
   }
   </script>
+
+  <style scoped>
+    .wrapper{
+      width: 300px;
+    }
+  </style>

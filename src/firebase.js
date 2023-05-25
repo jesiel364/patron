@@ -37,15 +37,5 @@ prodsSnapShot.forEach((prod) => {
 
 const cortes = []
 
-const getFirestoreData = async () => {
-  const querySnapshot = await getDocs(collection(db, "servicos"));
-  querySnapshot.forEach((doc) => cortes.push(doc))
-  
-};
-
-getFirestoreData();
-
-
-
 
 export default servicos;

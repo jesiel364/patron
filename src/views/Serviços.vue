@@ -4,15 +4,16 @@
     <div class="container">
      
 
-      <v-card id="content" theme='dark' class="mx-auto mt-5 ">
+      <v-card id="content" theme='dark' class="mx-auto pt-5 ">
         <div class="divs">
           <div class="box">
             <logo_small class='text-center mb-5' id='logo' />
           </div>
           <div class="box">
             <div id="perfil-desc">
-              <p class="font-weight-bold" id="perfil-name">Yda Jean Barbershop</p>
-              <p class="" id="perfil-rua">Rua Curió, 575, São Bento</p>
+              <!-- <p class="font-weight-bold" id="perfil-name">Yda Jean Barbershop</p> -->
+              <p class="font-weight-medium" >Nossa barbearia fica no endereço</p>
+              <p class="" id="perfil-rua">Rua Curió, 575 - São Bento</p>
             </div>
           </div>
         </div>
@@ -138,10 +139,10 @@ export default {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../src/assets/jason-leung-2seUdPQNy_I-unsplash.jpg') no-repeat center center;
   background-size: cover;
   align-items: center;
-  display: flex;
+
   background-color: red;
   align-items: center;
-  transform: scale(1.1);
+  padding-top: 20PX;
   width: 100%;
   max-width: 100vw;
   height: 100%;
@@ -278,10 +279,11 @@ v-btn {
   #content {
     min-width: 100px;
     width: 100%;
+    border-radius: 0;
   }
 
   .wrapper {
-
+    padding-top: 0;
     width: 100%;
   }
 
@@ -302,5 +304,7 @@ v-btn {
     line-height: .5;
     /*background-color: red;*/
   }
+
+
 }
 </style>
