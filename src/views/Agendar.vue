@@ -3,12 +3,12 @@
     <div class='wrapper'>
 
 
-      <div class="form">
+      <div class="form bg-dark">
 
         <h2>Minha Reserva</h2>
 
 
-        <div class="div1">
+        <v-card variant="outlined" class="div1">
           <v-avatar >
             <v-img  src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
           </v-avatar>
@@ -20,9 +20,10 @@
             <p>R${{corte.item.valor}},00</p>
           </div>
 
-        </div>
+        </v-card>
 
-        <div class="div2">
+        
+          <div  class="div2">
           <v-avatar color="grey" size="60" rounded="">
             <v-img  :src="corte.item.imagem" cover></v-img>
           </v-avatar>
@@ -30,14 +31,14 @@
             <p id='corte'>{{corte.item.titulo}}</p>
             <p id='time'>{{corte.item.time}}min</p>
           </div>
-
-
-
-        </div>
-
+          <br>
+          </div>
+  
         <div class="mx-auto text-center">
 
-          <VueDatePicker class="mb-2 mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
+        <VueDatePicker :min-date="new Date()" teleport-center="true" id="date" placeholder="Que dia deseja?" dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
+
+
 
           <br>
 
@@ -176,7 +177,7 @@ body,
 html {}
 
 #container {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../src/assets/bg1.jpg') no-repeat center center;
   background-size: cover;
   background-color: red;
   transform: scale(1.1);
@@ -190,7 +191,7 @@ html {}
 }
 
 .wrapper {
-  background-color: #795548;
+  background-color: #282828;
   width: 500px;
 /*  height: 500px;*/
   margin: auto;
@@ -221,7 +222,7 @@ h2 {
 }
 
 .div1 {
-  background-color: #3e2723;
+  /*background-color: #3e2723;*/
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -252,7 +253,7 @@ h2 {
 
 
 .div2 {
-  background-color: #3e2723;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -302,5 +303,6 @@ h2 {
   #container{
     padding-top: 20px;
   }
+
 }
 </style>
