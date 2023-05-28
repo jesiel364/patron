@@ -12,8 +12,12 @@ export default defineConfig({
     }
   },
   build: {
+<<<<<<< HEAD
 
     target: 'esnext'
 
+=======
+    target: 'esnext'
+>>>>>>> 452463e (vite)
   }
 })
