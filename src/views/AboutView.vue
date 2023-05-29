@@ -202,16 +202,10 @@ background: #977656;
    
 }
 
-  #container{
      
     
 /*    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;*/
-    background-size: cover;
-    background-color: red;
-    transform: scale(1.1);
-    align-items: center;
-  }
-}
+}  
 
 @media(max-width: 800px) {
   #frame {
