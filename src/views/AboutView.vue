@@ -181,10 +181,15 @@ background: #977656;
   width: 600px; 
 }
 
-@media(min-width: 800px) {
-  #container {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=986&q=80') no-repeat center center;
+#container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=986&q=80') no-repeat center center;
+
   background-size: cover;
+}
+
+@media(min-width: 700px) {
+  #container {
+
   align-items: center;
 
   background-color: red;
@@ -196,18 +201,10 @@ background: #977656;
 
   }
 
-  #frame{
-/*  background-color: red;*/
-/*  margin: 0px;*/
-   
-}
 
-     
-    
-/*    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( '../src/assets/allef-vinicius-IvQeAVeJULw-unsplash.jpg') no-repeat center center;*/
 }  
 
-@media(max-width: 800px) {
+@media(max-width: 700px) {
   #frame {
     min-width: 100px;
     width: 100%;
@@ -240,8 +237,7 @@ background: #977656;
   #container {
 /*    width: 100%;*/
     
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url( 'https://images.unsplash.com/photo-1517832606299-7ae9b720a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=986&q=80') no-repeat center center;
-    background-size: cover;
+   
     background-color: red;
 /*    transform: scale(1.1);*/
     align-items: center;
