@@ -20,6 +20,7 @@
         <v-list nav>
           <v-list-item prepend-icon="mdi-home" :to="{path: '/'}" title="Inicio" ></v-list-item>
           <v-list-item prepend-icon="mdi-chair-rolling" :to="{path: '/servicos'}" title="Serviços" ></v-list-item>
+          <v-list-item prepend-icon="mdi-account" :to="{path: '/login'}" title="Login" ></v-list-item>
        <!--    <v-divider></v-divider>
           <v-list-item prepend-icon=" mdi-cog" :to="{path: '/config'}" title="Configurações"></v-list-item> -->
         </v-list>

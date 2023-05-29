@@ -302,7 +302,6 @@ h2 {
 
   #container{
     padding-top: 20px;
-    background-color: blue;
   }
 
 }
