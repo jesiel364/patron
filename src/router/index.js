@@ -38,6 +38,20 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue')
+    },
+
+            {
+
+      path: '/cadastro',
+      name: 'cadastro',
+      component: () => import('../views/Cadastro.vue')
+    },
+
+                {
+
+      path: '/painel',
+      name: 'painel',
+      component: () => import('../views/Painel.vue')
     }
   ]
 })

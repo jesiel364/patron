@@ -20,7 +20,7 @@
 
         <p id="thead" class="font-weight-black mb-7">Serviços</p>
 
-        <div v-for="item in servicos" :key="id" class="servicos   mb-3 pb-0">
+        <div v-for="item in servicos" class="servicos   mb-3 pb-0">
 
           <div id="cont-1">
 
@@ -55,12 +55,13 @@ import { userConfig } from '@/stores/user'
 import logo_small from '../components/logo_sm.vue'
 import messComp from '../components/messComp.vue'
 
-import servicos from "../firebase";
-import { getDocs, doc, deleteDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { app } from "../firebase";
+import { collection, getDocs, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
+import { useFirestore, useCollection  } from 'vuefire'
 
-// console.log(servicosRef)
-
-
+const db = getFirestore(app);
+const servicos = useCollection(collection(db, 'servicos'), orderBy('valor'))
 
 export default {
 
@@ -71,26 +72,11 @@ export default {
 
   },
 
- 
-  
-
-
-
-  
     methods: {
-      define(data) {
-        const newObj = {
-          id: 1,
-          titulo: 'Militar',
-          valor: 12,
-          descricao: 'Descrição do Item 1',
-          imagem: 'https://i.pinimg.com/564x/52/76/df/5276dfd89d7f9a674f56c28eb1abe2e0.jpg',
-        }
-        this.store.setMyObject(data)
-      },
-
+      // define(data) {
+      //   this.store.setMyObject(data)
+      // },
       enviarObjeto(item) {
-      const objeto = { nome: 'Exemplo', idade: 25 }
       this.$router.push({ name: 'agendar', params: { item: JSON.stringify(item) } })
     }
      
@@ -106,11 +92,9 @@ export default {
 
 
       message: {
-
         author: 'Jean Pierre',
         date: '10, Mai 2023',
         mess: 'Funcionamos todos os dias das 8h ás 19h!'
-
       },
       servicos : servicos
     }),

@@ -36,7 +36,7 @@
   
         <div class="mx-auto text-center">
 
-        <VueDatePicker :min-date="new Date()" teleport-center="true" id="date" placeholder="Que dia deseja?" dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
+        <VueDatePicker :min-date="new Date()" teleport-center="true" id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"></VueDatePicker>
 
 
 
@@ -98,7 +98,14 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment';
 import { userConfig } from '@/stores/user'
-import servicos from "../firebase";
+
+import { getFirestore } from "firebase/firestore";
+import { app } from "../firebase";
+import { collection, getDocs, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
+import { useFirestore, useCollection  } from 'vuefire'
+
+const db = getFirestore(app);
+const servicos = useCollection(collection(db, 'servicos'), orderBy('valor'))
 
 
 
@@ -126,13 +133,6 @@ export default {
 
   data: () => ({
     loading: false,
- 
-    items: [
-      { id: 1, title: 'Corte social', valor: 20 },
-      { id: 2, title: 'Corte degradê', valor: 25 },
-      { id: 3, title: 'Colorir cabelo', valor: 50 },
-      { id: 4, title: 'Fazer sobrancelhas', valor: 10 },
-    ],
     corte: null,
     props: ['modelValue'],
     emits: ['update:modelValue'],

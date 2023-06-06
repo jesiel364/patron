@@ -1,11 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDocs,
-  addDoc,
-} from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA2AhM0VBM2gZHgY0HPFFQUfdVYJS9usTI",
@@ -18,24 +12,5 @@ const firebaseConfig = {
   measurementId: "G-ETP1BX25J2",
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Initialize Firebase
-const servicosRef = collection(db, "servicos");
-const corte = collection(db, "corte");
-
-let prodsSnapShot = await getDocs(servicosRef);
-let servicos = [];
-prodsSnapShot.forEach((prod) => {
-  let prodData = prod.data();
-  prodData.id = prod.id;
-  servicos.push(prodData);
-});
-
-// servicos.forEach(obj => {
-//     console.log(obj)
-// })
-
-const cortes = []
-
-
-export default servicos;
+export const app = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);

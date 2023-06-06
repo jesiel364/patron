@@ -21,6 +21,7 @@
           <v-list-item prepend-icon="mdi-home" :to="{path: '/'}" title="Inicio" ></v-list-item>
           <v-list-item prepend-icon="mdi-chair-rolling" :to="{path: '/servicos'}" title="Serviços" ></v-list-item>
           <v-list-item prepend-icon="mdi-account" :to="{path: '/login'}" title="Login" ></v-list-item>
+          <v-list-item prepend-icon="mdi-table-cog" :to="{path: '/painel'}" title="Painel" ></v-list-item>
        <!--    <v-divider></v-divider>
           <v-list-item prepend-icon=" mdi-cog" :to="{path: '/config'}" title="Configurações"></v-list-item> -->
         </v-list>
@@ -39,8 +40,40 @@
 </template>
 
 <script>
+import { app } from "../firebase";
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
+const auth = getAuth(app)
+
+
   export default {
-    data: () => ({ drawer: null }),
+    data: () => (
+      { 
+    drawer: null,
+    logado: false
+    }),
+
+
+      created() {
+    // this.getServicos()
+    this.verify()
+  },
+
+
+    methods: {
+            verify(){
+        onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    console.log('logado')
+    this.logado = true
+
+  } else {
+    this.logado = false
+  }
+})
+      },
+    }
   }
   </script>
 
