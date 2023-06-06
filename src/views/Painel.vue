@@ -102,27 +102,27 @@ export default {
     <thead>
       <tr>
         <!-- <th class="text-left">ID</th> -->
+         <th class="text-left">Ações</th>
         <th class="text-left">Titulo</th>
         <th class="text-left">Valor</th>
         <th class="text-left">Tempo</th>
         <th class="text-left">Imagem</th>
-        <th class="text-left">Ações</th>
+      
 
       </tr>
     </thead>
     <tbody>
       <tr v-for="item in list" :key="item.id">
         <!-- <td>{{ item.id }}</td> -->
+          <td class="d-flex align-center">
+       <Editar :my-prop="item" />
+          <v-btn class="ml-2" @click="excluir(item.id)" density="compact" icon="mdi-delete" color="red"></v-btn>
+        </td>
         <td>{{ item.titulo }}</td>
         <td>R${{ item.valor }}</td>
-        <td>{{ item.time }}min</td>
+        <td>{{ item.time }}</td>
         <td v-if='item.img'><a href=item.img>{{ item.img }}</a></td>
         <td v-else>Nenhuma</td>
-
-        <td class="d-flex align-center">
-       <Editar :my-prop="item" />
-          <v-btn @click="excluir(item.id)" density="compact" icon="mdi-delete" color="red"></v-btn>
-        </td>
 
       </tr>
     </tbody>

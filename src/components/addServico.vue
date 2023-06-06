@@ -18,19 +18,25 @@
       :error-messages="preco.errorMessage.value"
       label="Valor"
       type='number'
+      prefix="R$"
+			step="0.01"
     ></v-text-field>
-
-          <v-text-field
-      v-model="tempo.value.value"
-      :error-messages="tempo.errorMessage.value"
-      label="Tempo estimado"
-    ></v-text-field>
+    
+    <v-select
+  clearable
+  v-model="tempo.value.value"
+  :error-messages="tempo.errorMessage.value"
+  label="Tempo estimado"
+  :items="['5min', '10min', '15min', '30min', '1h', '2h']"
+  variant="solo-inverted"
+></v-select>
 
               <v-text-field
       v-model="img.value.value"
       :error-messages="img.errorMessage.value"
       label="Imagem"
       type='url'
+      clearable
 
     ></v-text-field>
 
@@ -78,9 +84,11 @@
             return "Insira um preço"
           },
           tempo (value) {
-            if (value?.length < 3 && /[0-9-]+/.test(value)) return true
-            return "Campo obrigatório"
+            if (value) return true
+            return 'Escolha um item'
+            
           },
+
 
         },
       })
@@ -98,8 +106,8 @@
             const docRef = addDoc(collection(db, "servicos"), {
               titulo: values.titulo,
               valor: Number(values.preco),
-              time: Number(values.tempo),
-              img: String(values.img)
+              time: String(values.tempo),
+              img: Number(values.img)
             });
             // console.log("Document written with ID: ", docRef.id);
            

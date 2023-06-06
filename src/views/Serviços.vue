@@ -30,8 +30,8 @@
 
           <div id="cont-2">
             <p id="valor" class="font-weight-bold">R${{ item.valor }},00</p>
-            <v-btn  theme="light" @click='enviarObjeto({item})'
-              class="ml-8 mt-1 rounded-pill bg-brown">confirmar</v-btn>
+            <v-btn  theme="light"  @click='enviarObjeto({item})'
+              class="ml-8 mt-1 rounded-pill bg-brown" icon><v-icon>mdi-content-cut</v-icon> </v-btn>
 
 
           </div>

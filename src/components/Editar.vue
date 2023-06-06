@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent width="1024">
     <template v-slot:activator="{ props }">
-      <v-btn icon="mdi-pen" color="alert" v-bind="props"> </v-btn>
+      <v-btn density="compact" icon="mdi-pen" color="warning" v-bind="props"> </v-btn>
     </template>
     <v-card>
       <v-card-title>
@@ -46,15 +46,6 @@
               </v-text-field>
             </v-col>
 
-            <!--      <v-col-->
-            <!--        cols="12"-->
-            <!--        sm="6"-->
-            <!--      >-->
-            <!--         <v-select :items="['SIM', 'NÃO']"-->
-
-            <!--label="Ativo"></v-select>-->
-
-            <!--      </v-col>-->
           </v-row>
         </v-container>
         <!--<small>{{myProp}}</small>-->
