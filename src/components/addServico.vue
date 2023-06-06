@@ -1,7 +1,7 @@
 <template>
 
-<div class="mx-3">
-  <h2 class="px-3">
+<div class="mt-3">
+  <h2 class="px-2">
       Adicionar serviço
 </h2>
   <form @submit.prevent="submit">

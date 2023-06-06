@@ -90,7 +90,7 @@ export default {
    
 <div v-if='logado' id='container'>
 
-  <div  class='card mr-5 px-5'>
+  <div  class='card px-2'>
 
 
 <div id="div1">  
@@ -189,9 +189,6 @@ a,
   color: #fafafa;
 }
 
-#div2, #div1{
-  background-color: #282828;
-}
 
 @media screen and (min-width: 768px){
   .card{
@@ -212,6 +209,10 @@ a,
     height: 400px;
   }
 
+  .card{
+    @apply mr-5 mb-5;
+  }
+
 
 
 }
@@ -221,6 +222,10 @@ a,
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
   }
+  .card{
+    @apply mr-5 px-5;
+  }
+  
 
 }
 </style>
