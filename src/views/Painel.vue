@@ -93,10 +93,10 @@ export default {
   <div  class='card mr-5 px-5'>
 
 
+<div id="div1">  
+  <h2>Serviços</h2>
+  <v-table theme='dark' id='table'>
   
-    <h2>Serviços</h2>
-  <v-table id='table'>
-
     <thead>
       <tr>
         <!-- <th class="text-left">ID</th> -->
@@ -132,7 +132,9 @@ export default {
   </v-table>
 </div>
 
-<div theme='dark' class='card'>
+</div>
+
+<div id='div2' class='card '>
 
   <AdicionarServico />
 </div>
@@ -177,25 +179,28 @@ a,
   transition: 0.4s;
 }
 
-/*.card {
-  @apply mx-auto;
-  width: 50%;
+.card {
+  
 
-}*/
+}
 
 .wrapper{
-  background-color: red;
+  background-color: #363636;
   color: #fafafa;
+}
+
+#div2, #div1{
+  background-color: #282828;
 }
 
 @media screen and (min-width: 768px){
   .card{
 
-
+      height: 400px;
   }
 
   #container{
-          display: grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 0.5rem;
 
@@ -204,6 +209,7 @@ a,
   #table{
 /*    width: 100%;*/
 /*    background-color: blue;*/
+    height: 400px;
   }
 
 
