@@ -1,6 +1,7 @@
 <script>
 import { ref } from "vue";
-import AdicionarServico from '@/components/addServico.vue'
+import addServico from '@/components/addServico.vue'
+import Editar from '@/components/Editar.vue'
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
 
@@ -19,7 +20,8 @@ let servicos = [];
 
 export default {
   components: {
-    AdicionarServico
+    addServico,
+    Editar
   }
   ,
   data() {
@@ -118,12 +120,7 @@ export default {
         <td v-else>Nenhuma</td>
 
         <td class="d-flex align-center">
-          <v-btn
-            class="mr-2"
-            density="compact"
-            icon="mdi-pencil"
-            color="warning"
-          ></v-btn>
+       <Editar :my-prop="item" />
           <v-btn @click="excluir(item.id)" density="compact" icon="mdi-delete" color="red"></v-btn>
         </td>
 
@@ -136,21 +133,15 @@ export default {
 
 <div id='div2' class='card '>
 
-  <AdicionarServico />
+  <addServico />
 </div>
-
-<!--   <ul>
-    <li v-for="item in list" >
-     <span>{{ item.id }} - {{item.titulo}} - {{item.valor}} - {{item.time}}</span>
-    </li>
-  </ul> -->
 
 </div>
 
 <div id="container" v-else color='alert'>
   <div class="px-2">
   <p>Area restrita a apenas administradores do site</p>
-  <p>Se for um usuário autorizado, faça o login clicando <router-link to='/login'>aqui</router-link></p>
+  <p>Se for um usuário <strong>autorizado</strong>, faça o login clicando <router-link to='/login'>aqui.</router-link></p>
 </div>
 </div>
 </div>

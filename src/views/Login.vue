@@ -1,7 +1,16 @@
 <template>
   <div class="wrapper">  <div id='container'>
-  <h1 v-if="logado" class="pt-3 text-center">Você está logado!</h1>
-
+ 
+ <div v-if="logado">
+  <h1  class="pt-3 text-center">Olá {{user.displayName}}, você está logado!</h1>
+	
+<v-avatar>
+      <v-img
+        src="https://cdn.vuetifyjs.com/images/john.jpg"
+        alt="John"
+      ></v-img>
+    </v-avatar>
+</div>	
   <div id='form' class="mx-3">
     <form v-if="!logado" @submit.prevent="submit">
       <h1>Faça o login</h1>
@@ -22,7 +31,7 @@
       <router-link to="/cadastro">Não tem conta?</router-link><br />
 
       <div class="mt-3 text-center">
-        <v-btn color="success" class="me-4 mb-2" type="submit"> Entrar </v-btn>
+        <v-btn color="success" class="me-4" type="submit"> Entrar </v-btn>
         
         <v-btn variant="outlined" prepend-icon="mdi-google" class="" @click="signWithGoogle()">Entrar com o Google</v-btn>
       </div>
@@ -56,7 +65,8 @@
     ,
     data(){
       return {
-        logado: false
+        logado: false,
+        user: ''
       }
 
     }
@@ -67,6 +77,7 @@
   if (user) {
     const uid = user.uid;
     this.logado = true
+    this.user = user
 
   } else {
     this.logado = false
@@ -96,7 +107,8 @@ signOut(auth).then(() => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user)
+    alert(JSON.stringify(user, null, 2))
+    this.user = user
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
@@ -137,13 +149,10 @@ signOut(auth).then(() => {
       const logado = ref('logado')
 
       const submit = handleSubmit(values => {
-        alert(JSON.stringify(values, null, 2))
+        // alert(JSON.stringify(values, null, 2))
          signInWithEmailAndPassword(auth,  values.email, values.pwd)
         .then((data) => {
-
           console.log("success")
-
-
         })
         .catch((error) => {
 

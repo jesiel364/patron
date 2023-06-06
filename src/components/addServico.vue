@@ -99,7 +99,7 @@
               titulo: values.titulo,
               valor: Number(values.preco),
               time: Number(values.tempo),
-              img: Number(values.img)
+              img: String(values.img)
             });
             // console.log("Document written with ID: ", docRef.id);
            
