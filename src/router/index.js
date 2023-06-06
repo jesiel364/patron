@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/s',
-      name: 'home',
-      component: HomeView
-    },
+
     {
       path: '/agendar/:item',
       name: 'agendar',
@@ -16,8 +11,8 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'sobre',
-      component: () => import('../views/AboutView.vue')
+      name: 'home',
+      component: () => import('../views/Home.vue')
     },
     {
 

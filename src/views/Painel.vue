@@ -149,7 +149,7 @@ export default {
 
 <div id="container" v-else color='alert'>
   <div class="px-2">
-  <strong>Area restrita a apenas administradores do site</strong>
+  <p>Area restrita a apenas administradores do site</p>
   <p>Se for um usuário autorizado, faça o login clicando <router-link to='/login'>aqui</router-link></p>
 </div>
 </div>
@@ -157,10 +157,13 @@ export default {
 </template>
 
 <style scoped>
+  :root {
+    --fundo: #363636;
+  }
   #container {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--fundo);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,

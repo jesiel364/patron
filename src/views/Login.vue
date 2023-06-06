@@ -1,7 +1,8 @@
 <template>
+  <div class="wrapper">  <div id='container'>
   <h1 v-if="logado" class="pt-3 text-center">Você está logado!</h1>
 
-  <div id='container' class="mx-3">
+  <div id='form' class="mx-3">
     <form v-if="!logado" @submit.prevent="submit">
       <h1>Faça o login</h1>
 
@@ -21,7 +22,7 @@
       <router-link to="/cadastro">Não tem conta?</router-link><br />
 
       <div class="mt-3 text-center">
-        <v-btn color="success" class="me-4" type="submit"> Entrar </v-btn>
+        <v-btn color="success" class="me-4 mb-2" type="submit"> Entrar </v-btn>
         
         <v-btn variant="outlined" prepend-icon="mdi-google" class="" @click="signWithGoogle()">Entrar com o Google</v-btn>
       </div>
@@ -29,10 +30,13 @@
        
     </form>
 
-    <div class="mx-auto mt-3 d-flex" v-else>
+    <div class="mx-auto text-center mt-3" v-else>
       <v-btn color="success" class="" @click="logout()">Deslogar</v-btn>
     </div>
   </div>
+</div>
+</div>
+
 </template>
 
 <script>
@@ -155,29 +159,12 @@ signOut(auth).then(() => {
 </script>
 
 <style scoped>
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  .wrapper{
+        background-color: #363636;
+        color: #f8f8f8;
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  }
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
 
 a,
 .green {
@@ -186,30 +173,7 @@ a,
   transition: 0.4s;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
 
 @media (min-width: 1024px) {
   header {
@@ -218,65 +182,13 @@ nav a:first-of-type {
     padding-right: calc(var(--section-gap) / 2);
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 
 /* color palette from <https://github.com/vuejs/theme> */
-:root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
 
 *,
 *::before,
@@ -289,7 +201,7 @@ nav a:first-of-type {
 #container {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background-color: var(--vt-c-black);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
@@ -298,6 +210,36 @@ nav a:first-of-type {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width: 768px){
+  .card{
+
+      height: 400px;
+  }
+
+  #form{
+    @apply mx-auto;
+    width: 546px;
+/*    display: flex;*/
+/*    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;*/
+
+
+
+  }
+
+
+
+}
+
+@media screen (min-width: 1024px){
+  #container{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+       background-color: blue;
+  }
+  
+
 }
 
 </style>

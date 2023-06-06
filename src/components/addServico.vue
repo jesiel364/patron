@@ -35,7 +35,7 @@
     ></v-text-field>
 
 
- 
+ <div >
 
     <v-btn
       class="me-4"
@@ -44,9 +44,10 @@
       Adicionar serviço
     </v-btn>
 
-    <v-btn @click="handleReset">
+    <v-btn id="button" @click="handleReset">
       Limpar
     </v-btn>
+</div>
   </form>
   
   </div>
@@ -120,4 +121,9 @@
 </script>
 
 <style>
+  @media screen and (max-width: 436px){
+    #button{
+/*      @apply mt-2;*/
+    }
+  }
 </style>
