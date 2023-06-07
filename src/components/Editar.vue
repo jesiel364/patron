@@ -15,6 +15,7 @@
                 label="Titulo"
                 v-model="myProp.titulo"
                 required
+                clearable
               ></v-text-field>
               <p></p>
             </v-col>
@@ -26,22 +27,25 @@
                 prefix="R$"
                 type="number"
                 step="0.01"
+                clearable
               ></v-text-field>
             </v-col>
 
             <v-col cols="12">
-              <v-text-field
-                label="Tempo estimado em minutos"
-                type="number"
-                v-model="myProp.time"
-              >
-              </v-text-field>
+    <v-select
+  clearable
+  v-model="myProp.time"
+  label="Tempo estimado"
+  :items="['5min', '10min', '15min', '30min', '1h', '2h']"
+  variant="solo-inverted"
+></v-select>
             </v-col>
             <v-col cols="12">
               <v-text-field
                 label="Imagem (opcional)"
                 type="url"
                 v-model="myProp.img"
+                clearable
               >
               </v-text-field>
             </v-col>

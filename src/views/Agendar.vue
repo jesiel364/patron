@@ -29,7 +29,7 @@
           </v-avatar>
           <div id="info">
             <p id='corte'>{{corte.item.titulo}}</p>
-            <p id='time'>{{corte.item.time}}min</p>
+            <p id='time'>{{corte.item.time}}</p>
           </div>
           <br>
           </div>

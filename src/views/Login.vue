@@ -3,15 +3,16 @@
  
  <div v-if="logado">
   <h1  class="pt-3 text-center">Olá {{user.displayName}}, você está logado!</h1>
+  <v-avatar :src='user.photoURL'></v-avatar>
 	
 <v-avatar>
       <v-img
-        src="https://cdn.vuetifyjs.com/images/john.jpg"
+        :src=user.photoURL
         alt="John"
       ></v-img>
     </v-avatar>
 </div>	
-  <div id='form' class="mx-3">
+  <div id='form' class="mx-auto">
     <form v-if="!logado" @submit.prevent="submit">
       <h1>Faça o login</h1>
 
@@ -53,6 +54,9 @@
   import { useField, useForm } from 'vee-validate'
   import { app } from "../firebase";
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, getRedirectResult, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+  import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+  const db = getFirestore(app)
 
   const auth = getAuth(app)
 
@@ -109,8 +113,27 @@ signOut(auth).then(() => {
     const user = result.user;
     alert(JSON.stringify(user, null, 2))
     this.user = user
+
     // IdP data available using getAdditionalUserInfo(result)
     // ...
+          try {
+            const docRef = addDoc(collection(db, "users"), {
+              uid: user.uid,
+              id: user.uid,
+              name: user.displayName,
+              email: user.email,
+              photo: user.photoURL,
+              phone: user.phoneNumber,
+           
+
+
+            });
+            // console.log("Document written with ID: ", docRef.id);
+           
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            alert(e)
+          }
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;

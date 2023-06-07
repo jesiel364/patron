@@ -11,6 +11,7 @@
       v-model="titulo.value.value"
       :error-messages="titulo.errorMessage.value"
       label="Titulo"
+      clearable
     ></v-text-field>
     
        <v-text-field
@@ -20,6 +21,7 @@
       type='number'
       prefix="R$"
 			step="0.01"
+      clearable
     ></v-text-field>
     
     <v-select
@@ -107,7 +109,7 @@
               titulo: values.titulo,
               valor: Number(values.preco),
               time: String(values.tempo),
-              img: Number(values.img)
+              img: String(values.img)
             });
             // console.log("Document written with ID: ", docRef.id);
            
@@ -123,6 +125,10 @@
     methods:{
       async addServico(){
 
+      },
+
+      addNewUser(){
+        
       }
     }
   }

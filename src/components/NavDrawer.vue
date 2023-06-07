@@ -1,8 +1,24 @@
 <template>
   <div class="wrapper">
     <v-navigation-drawer v-model="drawer" theme="dark"
-      ><v-list>
+      >
+      <v-list v-if="user">
+          <v-list-item
+            
+            v-bind:prepend-avatar="user.photoURL"
+            title="Yda Jean Barber"
+            v-bind:subtitle="user.email"
+          >
+            <template v-slot:append>
+
+              <UserMenu :myProp='user' />
+
+            </template>
+          </v-list-item>
+        </v-list>
+      <v-list v-else>
         <v-list-item
+
           title="Yda Jean Barber"
           subtitle="@ydajean - Boa Vista, RR"
         >
@@ -55,15 +71,21 @@
 </template>
 
 <script>
+import UserMenu from '@/components/UserMenu.vue'
 import { app } from "../firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const auth = getAuth(app);
 
 export default {
+
+  components:{
+    UserMenu
+  },
   data: () => ({
     drawer: null,
     logado: false,
+    user: ''
   }),
 
   created() {
@@ -78,8 +100,11 @@ export default {
           const uid = user.uid;
           console.log("logado");
           this.logado = true;
+          this.user = user
         } else {
           this.logado = false;
+          this.user = ''
+        
         }
       });
     },
@@ -90,10 +115,12 @@ export default {
           // Sign-out successful.
 
           this.logado = false;
+          this.user = ''
         })
         .catch((error) => {
           // An error happened.
           alert(error);
+
         });
     },
   },

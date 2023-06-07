@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import addServico from '@/components/addServico.vue'
 import Editar from '@/components/Editar.vue'
+import Users from '@/components/Users.vue'
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
 
@@ -11,24 +12,28 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const auth = getAuth(app)
 const db = getFirestore(app);
-const list = useCollection(collection(db, 'servicos'), orderBy('valor'))
-const q = query(collection(db, 'servicos'), where("valor", "<", "15"));
+const servicosCol = collection(db, 'servicos')
+const list = useCollection(servicosCol)
 
-let servicos = [];
+const users = useCollection(collection(db, 'users'))
+
 
 
 
 export default {
   components: {
     addServico,
-    Editar
+    Editar,
+    Users
   }
   ,
   data() {
     return {
       servicos: [],
+      users: users,
       list: list,
-      logado: false
+      logado: false,
+      res: '',
     };
   },
 
@@ -71,7 +76,7 @@ export default {
 
     getServicosShot() {
     onSnapshot(getDocs(db, "servicos"), (snap) => {
-      console.log(snap)
+      // console.log(snap)
     })
   //   querySnapshot.forEach((doc) => {
   //  this.servicos.push([doc.id, doc.data()]);
@@ -87,6 +92,7 @@ export default {
 </script>
 
 <template>
+  <small>{{res}}</small>
 <div class="wrapper px-5">
       <h1 class="pt-3 text-center">Página de administração</h1>
    
@@ -112,7 +118,7 @@ export default {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in list" :key="item.id">
+      <tr  v-for="item in list" :key="item.id">
         <!-- <td>{{ item.id }}</td> -->
           <td class="d-flex align-center">
        <Editar :my-prop="item" />
@@ -121,7 +127,7 @@ export default {
         <td>{{ item.titulo }}</td>
         <td>R${{ item.valor }}</td>
         <td>{{ item.time }}</td>
-        <td v-if='item.img'><a href=item.img>{{ item.img }}</a></td>
+        <td v-if="item.img != 'undefined' && item.img != 'null'"><a href='{{item.img}}'>{{ item.img }}</a></td>
         <td v-else>Nenhuma</td>
 
       </tr>
@@ -129,14 +135,21 @@ export default {
   </v-table>
 </div>
 
+  <Users :my-prop='users' />
+
 </div>
 
 <div id='div2' class='card '>
 
   <addServico />
-</div>
 
 </div>
+
+
+
+</div>
+
+
 
 <div id="container" v-else color='alert'>
   <div class="px-2">
@@ -187,7 +200,7 @@ a,
 @media screen and (min-width: 768px){
   .card{
 
-      height: 400px;
+      height: 100%;
   }
 
   #container{
@@ -200,7 +213,8 @@ a,
   #table{
 /*    width: 100%;*/
 /*    background-color: blue;*/
-    height: 400px;
+    height: 100%;
+    max-width: 600px;
   }
 
   .card{

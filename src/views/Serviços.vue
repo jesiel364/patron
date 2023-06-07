@@ -25,7 +25,7 @@
           <div id="cont-1">
 
             <p class="font-weight-bold" id="title">{{ item.titulo }}</p>
-            <p class='text-subtitle-1' id="time">{{ item.time }}min</p>
+            <p class='text-subtitle-1' id="time">{{ item.time }}</p>
           </div>
 
           <div id="cont-2">

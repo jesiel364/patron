@@ -41,9 +41,17 @@
   import { ref } from 'vue'
   import { useField, useForm } from 'vee-validate'
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+  import { getFirestore, collection, addDoc } from "firebase/firestore";
   import { app } from "../firebase";
 
+  const db = getFirestore(app)
+
   export default {
+    data() {
+      return {
+        usuario: [] ,
+      }
+    },
     setup () {
       const { handleSubmit, handleReset } = useForm({
         validationSchema: {
@@ -55,7 +63,7 @@
           },
           pwd (value) {
           	if (value?.length > 8 && /[0-9-]+/.test(value)) return true
-          	return "Insira uma senha"
+          	return "A senha precisa"
           }
         },
       })
@@ -69,8 +77,27 @@
         alert(JSON.stringify(values, null, 2))
         createUserWithEmailAndPassword(auth,  values.email, values.pwd)
         .then((data) => {
-        	alert("Usuário registrado com sucessi")
-        	console.log("success")
+        	alert("Usuário registrado com sucesso")
+          // this.usuario = data
+        	console.log(data)
+          try {
+            const docRef = addDoc(collection(db, "users"), {
+              uid: data.user.uid,
+              id: data.user.uid,
+              name: data.user.displayName,
+              email: data.user.email,
+              photo: data.user.photoURL,
+              phone: data.user.phoneNumber,
+           
+
+
+            });
+            // console.log("Document written with ID: ", docRef.id);
+           
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            alert(e)
+          }
         	
         })
         .catch((error) => {
@@ -78,6 +105,8 @@
         	alert(error.message)
         	console.log("erro")
         })
+
+
       })
 
       return { email, pwd, submit, handleReset }
