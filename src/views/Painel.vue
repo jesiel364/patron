@@ -3,6 +3,8 @@ import { ref } from "vue";
 import addServico from '@/components/addServico.vue'
 import Editar from '@/components/Editar.vue'
 import Users from '@/components/Users.vue'
+import AgendarComp from '@/components/AgendarComp.vue'
+import photoPic from '@/assets/photo-pic.png'
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
 
@@ -24,7 +26,9 @@ export default {
   components: {
     addServico,
     Editar,
-    Users
+    Users,
+    AgendarComp,
+    
   }
   ,
   data() {
@@ -34,6 +38,7 @@ export default {
       list: list,
       logado: false,
       res: '',
+      photoNull: photoPic
     };
   },
 
@@ -127,8 +132,13 @@ export default {
         <td>{{ item.titulo }}</td>
         <td>R${{ item.valor }}</td>
         <td>{{ item.time }}</td>
-        <td v-if="item.img != 'undefined' && item.img != 'null'"><a href='{{item.img}}'>{{ item.img }}</a></td>
-        <td v-else>Nenhuma</td>
+        <td v-if="item.img != 'undefined' && item.img != 'null' && item.img != ''"><v-avatar color="grey" size="60" rounded="">
+            <v-img  :src="item.img" cover></v-img>
+          </v-avatar></td>
+          <td v-else><v-avatar color="grey" size="60" rounded="">
+            <v-img  :src="photoNull" cover></v-img>
+          </v-avatar></td>
+        
 
       </tr>
     </tbody>
@@ -142,6 +152,7 @@ export default {
 <div id='div2' class='card '>
 
   <addServico />
+  
 
 </div>
 

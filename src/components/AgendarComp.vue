@@ -1,7 +1,5 @@
 <template>
  
-    <div class='wrapper'>
-
  <div id="container">
       <div class="form bg-dark">
 
@@ -92,7 +90,6 @@
       </div>
 
     </div>
-  </div>
 </template>
 
 <script>
@@ -299,7 +296,7 @@ h2 {
   #container {
     margin: 30px;
     min-width: 100px;
-		
+
 
   }
 

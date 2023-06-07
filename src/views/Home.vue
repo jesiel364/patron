@@ -5,7 +5,9 @@
    <h1>   Yda Jean BarberShop </h1> 
    <h2 class="text-center mt-1" id='sub'>Expert em serviços de barba e cabelo</h2>
 
-   <p id='text'>Na YDA JEAN Barbershop, oferecemos uma vasta gama de serviços profissionais de corte de cabelo e de cuidados de beleza para homens. Os nossos barbeiros experientes utilizam as mais recentes técnicas e ferramentas para lhe dar o visual perfeito. Quer necessite de um corte de cabelo clássico, de um corte de barba a direito ou de um corte de barba, temos tudo o que precisa.</p><br>
+   <p id='text'>"Desperte seu estilo na Barbearia <strong>YDAJEAN</strong>: Cortes precisos, barbas impecáveis e um ambiente único. Nossos barbeiros especializados estão prontos para transformar sua aparência. Descubra a excelência em cuidados masculinos e garanta um visual impecável.</p> 
+   
+   <p id='text'>Agende seu horário e experimente a arte da barbearia no seu melhor. Venha para a Barbearia <strong>YdaJean</strong> e deixe-nos cuidar do seu estilo com maestria."</p><br>
 
    <div class="" id='bt-div'>
    <v-btn to="/servicos" class='mx-auto' id='bt'>ver serviços</v-btn>
@@ -139,10 +141,9 @@ text-align: center;
 /*height: 160px;*/
   /* 16 Regular */
 
-font-family: 'Inter', serif;
-font-style: normal;
-font-weight: 400;
 font-size: 16px;
+    font-weight: 200;
+    color: #fefefe;
 line-height: 200%;
 /* or 32px */
 text-align: justify;
@@ -185,6 +186,10 @@ background: #977656;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=986&q=80') no-repeat center center;
 
   background-size: cover;
+  backdrop-filter: blur(200px);
+backdrop-filter: brightness(60%);
+backdrop-filter: contrast(40%);
+backdrop-filter: drop-shadow(4px 4px);
 }
 
 @media(min-width: 700px) {
