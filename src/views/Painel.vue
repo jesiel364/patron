@@ -105,22 +105,24 @@ export default {
         }
       });
     },
+
+
   },
 };
 </script>
 
 <template>
-  <small>{{ res }}</small>
   <div class="wrapper px-5">
     <h1 class="pt-3 text-center">Página de administração</h1>
 
-    <div v-if="logado" id="container">
+
     
         <div v-if="superUser">
-          <div class="card px-2">
+        <div v-if="logado" id="container">
+
             <div id="div1">
               <h2>Serviços</h2>
-              <v-table theme="dark" id="table">
+              <v-table height='400px' theme="dark" id="table">
                 <thead>
                   <tr>
                     <!-- <th class="text-left">ID</th> -->
@@ -134,7 +136,7 @@ export default {
                 <tbody>
                   <tr v-for="item in list" :key="item.id">
                     <!-- <td>{{ item.id }}</td> -->
-                    <td class="d-flex align-center">
+                    <td class="d-flex align-content-center">
                       <Editar :my-prop="item" />
                       <v-btn
                         class="ml-2"
@@ -167,45 +169,46 @@ export default {
                 </tbody>
               </v-table>
             </div>
-
-            <Users :my-prop="users" />
-          </div>
-
-          <div id="div2" class="card">
+     
+          <div id="div2" class="">
             <addServico />
           </div>
+
+      <div id=" " class="card mt-5">
+            <Users :my-prop="users" />
+</div>
         </div>
 
         
-        <div v-else>
+        <div id='d-flex' v-else>
             <v-alert
               v-model="alert2"
               border="start"
               variant="tonal"
-              closable
+              
               close-label="Close Alert"
-              color="error"
+              color=""
               title="Alerta"
             >
-              <p>Area restrita a apenas administradores do site</p>
+              <p>Area restrita a apenas administradores do site.</p>
           <p>Se for um usuário <strong>autorizado</strong>, faça o login clicando <router-link to='/login'>aqui.</router-link></p>
 
             </v-alert>
 
     
           </div>
-      
+
     </div>
 
-    <div id="container" v-else>
+    <div id="" v-else>
       <div>
         <v-alert
           v-model="alert"
           border="start"
           variant="tonal"
-          closable
+          
           close-label="Close Alert"
-          color="error"
+          color="alert"
           title="Acesso não permitido"
         >
           <p>Area restrita a apenas administradores do site</p>
@@ -215,9 +218,7 @@ export default {
           </p>
         </v-alert>
 
-        <div v-if="!alert" class="text-center">
-          <v-btn @click="alert = true"> Reset </v-btn>
-        </div>
+
       </div>
     </div>
   </div>
@@ -255,6 +256,8 @@ a,
 .wrapper {
   background-color: #363636;
   color: #fafafa;
+  height: 100%;
+
 }
 
 @media screen and (min-width: 768px) {
@@ -266,12 +269,16 @@ a,
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 0.5rem;
+/*    background-color: blue;*/
+
   }
+
+
 
   #table {
     /*    width: 100%;*/
-    /*    background-color: blue;*/
-    height: 100%;
+/*        background-color: blue;*/
+/*    height: 100%;*/
     max-width: 600px;
   }
 

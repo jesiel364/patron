@@ -30,12 +30,12 @@
 
           <div id="cont-2">
             <p id="valor" class="font-weight-bold">R${{ item.valor }},00</p>
-            <v-btn  theme="light"  @click='enviarObjeto({item})'
-              class="ml-8 mt-1 rounded-pill bg-brown" icon><v-icon>mdi-content-cut</v-icon> </v-btn>
+            <!-- <v-btn  theme="light"  @click='enviarObjeto({item})' class="ml-8 mt-1 rounded-pill bg-brown" icon><v-icon>mdi-content-cut</v-icon> </v-btn> -->
 
-
+              <AgendarComp :my-prop='item'/>
           </div>
         </div>
+
 
 
         <messComp :dict="message" />
@@ -54,6 +54,7 @@
 import { userConfig } from '@/stores/user'
 import logo_small from '../components/logo_sm.vue'
 import messComp from '../components/messComp.vue'
+import AgendarComp from '../components/AgendarComp.vue'
 
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
@@ -85,7 +86,8 @@ export default {
     components: {
 
       logo_small,
-        messComp
+        messComp,
+        AgendarComp
 
     },
     data: () => ({

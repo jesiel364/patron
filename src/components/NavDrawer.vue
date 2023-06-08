@@ -41,7 +41,7 @@
           v-if="!logado"
           prepend-icon="mdi-account"
           :to="{ path: '/login' }"
-          title="Login"
+          title="Entrar"
         ></v-list-item>
         <v-list-item
         v-if="logado"

@@ -37,7 +37,7 @@
   
         <div class="mx-auto text-center">
 
-        <VueDatePicker :min-date="new Date()" teleport-center="true" id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
+        <VueDatePicker :min-date="new Date()" teleport-center=true id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
         	cancel-text="Fechar"
         	select-text="Selecionar"
         ></VueDatePicker>
@@ -61,6 +61,7 @@
         </div>
 
         <v-card
+        color=''
         class='pt-2 mt-4 mb-4 pb-2'
         v-if="cliente && dateF"
   

@@ -1,6 +1,12 @@
 <template>
- 
- <div id="container">
+  <v-dialog v-model="dialog" persistent width="1024">
+    <template v-slot:activator="{ props }">
+      <!-- <v-btn density="compact" icon="mdi-pen" color="warning" v-bind="props"> </v-btn> -->
+       <v-btn  theme="light" v-bind="props"
+              class="ml-8 mt-1 rounded-pill bg-brown" icon="mdi-content-cut"></v-btn>
+    </template>
+  
+       <v-card>
       <div class="form bg-dark">
 
         <h2>Minha Reserva</h2>
@@ -8,7 +14,7 @@
 
         <v-card variant="outlined" class="div1">
           <v-avatar >
-            <v-img  src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+            <v-img  :src="barberPic" alt="John"></v-img>
           </v-avatar>
           <div id="barber-name">
             <p>Jean Pierre</p>
@@ -16,7 +22,7 @@
           </div>
 
           <div id='price'>
-            <p>R${{corte.item.valor}},00</p>
+            <!-- <p>R${{corte.item.valor}},00</p> -->
           </div>
 
         </v-card>
@@ -24,20 +30,20 @@
         
           <div  class="div2">
           <v-avatar color="grey" size="60" rounded="">
-            <v-img  :src="corte.item.img" cover></v-img>
+            <v-img  :src="myProp.img" cover></v-img>
           </v-avatar>
           <div id="info">
-            <p id='corte'>{{corte.item.titulo}}</p>
-            <p id='time'>{{corte.item.time}}</p>
+            <p id='corte'>{{myProp.titulo}}</p>
+            <p id='time'>{{myProp.time}}</p>
           </div>
           <br>
           </div>
   
         <div class="mx-auto text-center">
 
-        <VueDatePicker :min-date="new Date()" teleport-center="true" id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
-        	cancel-text="Fechar"
-        	select-text="Selecionar"
+        <VueDatePicker :min-date="new Date()" teleport-center=true id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
+          cancel-text="Fechar"
+          select-text="Selecionar"
         ></VueDatePicker>
 
 
@@ -59,16 +65,17 @@
         </div>
 
         <v-card
-        class='mt-4 mb-4 pb-2'
+        color='white'
+        class='pt-2 mt-4 mb-4 pb-2'
         v-if="cliente && dateF"
   
 
 >
   
-  <v-card-title><v-icon  >mdi-content-cut</v-icon>    {{corte.item.titulo}}</v-card-title>
+  <v-card-subtitle><v-icon  >mdi-content-cut</v-icon>    {{myProp.titulo}}</v-card-subtitle>
   <v-card-subtitle><v-icon  >mdi-face-man-shimmer-outline</v-icon>{{cliente}}</v-card-subtitle>
   <v-card-subtitle><v-icon  >mdi-calendar-range</v-icon>{{dateF}}</v-card-subtitle>
-  <v-card-subtitle><v-icon  >mdi-currency-brl</v-icon>{{corte.item.valor}},00</v-card-subtitle>
+  <v-card-subtitle><v-icon  >mdi-currency-brl</v-icon>{{myProp.valor}},00</v-card-subtitle>
 </v-card>
 
 
@@ -77,94 +84,97 @@
         :loading="loading"
         block
         class="text-none mb-4"
-        color="light-3"
+        color="success"
         size="x-large"
         variant="flat"
         @click="loading = !loading"
-        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0AServiço:%20' + 'Corte ' + corte.item.titulo + '%0A%0A'+ dateF + '%0A' + cliente "
+        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0AServiço:%20' +  myProp.titulo + '%0A%0A'+ dateF + '%0A' + cliente "
       >
         Confirmar
       </v-btn>
-
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
+          Fechar
+        </v-btn>
+<!--         <v-btn color="blue-darken-1" variant="text" @click="Editar()">
+          Atualizar
+        </v-btn> -->
+      </v-card-actions>
       
       </div>
 
-    </div>
+
+
+    </v-card>
+
+  </v-dialog>
 </template>
 
 <script>
+import barberPic from '@/assets/hairstylist.png'
 
-import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment';
-import { userConfig } from '@/stores/user'
 
+import { collection, getDocs, doc, query, where, setDoc, updateDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-import { app } from "../firebase";
-import { collection, getDocs, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { useFirestore, useCollection  } from 'vuefire'
+import { app } from "@/firebase";
 
 const db = getFirestore(app);
-const servicos = useCollection(collection(db, 'servicos'), orderBy('valor'))
+const servicos = useCollection(collection(db, 'servicos'))
 
-
-
-
-
-export default {
-  setup() {
-    const store = userConfig()
-
-    return { store }
+  export default {
+    data: () => ({
+      dialog: false,
+      date: '',
+      barberPic: barberPic,
+      cliente: '',
+      props: ['modelValue'],
+      emits: ['update:modelValue'],
+      loading: false,
+    }),
+    props: {
+    myProp: {
+      type: Object,
+      required: true
+    }
   },
 
-  computed:{
-    dateF() {
+  computed: {
+        dateF() {
      if (this.date){
       return moment(this.date).format("DD/MM/YYYY - hh:mm")
      }
      
    }
-  },
+ },
 
 
 
-  data: () => ({
-    loading: false,
-    corte: null,
-    props: ['modelValue'],
-    emits: ['update:modelValue'],
-    cliente: '',
-    date: ''
-
-  })
-  ,
-
-  mounted() {
-    
-  }
-  ,
-  created() {
-    const objeto = JSON.parse(this.$route.params.item)
-    console.log(objeto) // Aqui você tem acesso ao objeto enviado da página de origem
-    this.corte = objeto
-  }
-  ,
-
-  
-  watch: {
+   watch: {
     loading(val) {
       if (!val) return
 
       setTimeout(() => (this.loading = false), 2000)
     },
+  },
 
-
-
+  methods: {
+  Editar(){
+      // alert(JSON.stringify(this.myProp, null, 2))
+      const svc = doc(db, "servicos", this.myProp.id);
+    try {
+      updateDoc(svc, this.myProp);
+    }catch(error){
+      alert(error)
+    }
+    this.dialog = false
+     
+    }
   }
-}
-
+  }
 </script>
 
 <style scoped>
@@ -191,16 +201,13 @@ html {}
 
 #container{
   background-color: #282828;
-  width: 500px;
-/*  height: 500px;*/
+/*  width: 500px;
   margin: auto;
   align-items: center;
   justify-content: center;
 
   margin-top: 80px;
-  /*margin-bottom: 80px;*/
-  border-radius: 10px;
-  /*opacity: 0.9;*/
+  border-radius: 10px;*/
 }
 
 .form {
@@ -244,6 +251,10 @@ h2 {
   padding-left: 10px;
 }
 
+#barber-name small{
+  font-weight: 200;
+}
+
 #price {
   /* background-color: red; */
   margin-right: 20px;
@@ -256,7 +267,7 @@ h2 {
   background: transparent;
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  /*padding: 8px;*/
   border-radius: 10px;
   color: #fefefe;
   margin-top: 16px;
@@ -296,14 +307,14 @@ h2 {
   #container {
     margin: 30px;
     min-width: 100px;
-
+    
 
   }
 
   .wrapper{
     padding-top: 20px;
-  	max-height: 100vh;
-  	max-width: 100vh;
+    max-height: 100vh;
+    max-width: 100vh;
   
   }
 

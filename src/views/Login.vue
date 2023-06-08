@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import router from "@/router";
   import { ref } from 'vue'
   import { useField, useForm } from 'vee-validate'
   import { app } from "../firebase";
@@ -95,6 +96,7 @@ signOut(auth).then(() => {
   // Sign-out successful.
 
   this.logado = false
+  router.push('/')
 
 }).catch((error) => {
   // An error happened.
@@ -176,6 +178,7 @@ signOut(auth).then(() => {
          signInWithEmailAndPassword(auth,  values.email, values.pwd)
         .then((data) => {
           console.log("success")
+          router.push('/')
         })
         .catch((error) => {
 
