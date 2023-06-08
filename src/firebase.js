@@ -1,15 +1,12 @@
 import { initializeApp } from "firebase/app";
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyA2AhM0VBM2gZHgY0HPFFQUfdVYJS9usTI",
-  authDomain: "primeiro-projeto-6d3f8.firebaseapp.com",
-  databaseURL: "https://primeiro-projeto-6d3f8-default-rtdb.firebaseio.com",
-  projectId: "primeiro-projeto-6d3f8",
-  storageBucket: "primeiro-projeto-6d3f8.appspot.com",
-  messagingSenderId: "1010182689466",
-  appId: "1:1010182689466:web:0d684f115e0833de5e2883",
-  measurementId: "G-ETP1BX25J2",
+  apiKey: "AIzaSyAWffWJ4pfs8zlufWhX2sX4HhH9DJbzuLY",
+  authDomain: "ydajean-barber.firebaseapp.com",
+  projectId: "ydajean-barber",
+  storageBucket: "ydajean-barber.appspot.com",
+  messagingSenderId: "415621886708",
+  appId: "1:415621886708:web:b17a8e490276afd26d64a1"
 };
 
 export const app = initializeApp(firebaseConfig);
