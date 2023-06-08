@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">  <div id='container'>
+  <div class="wrapper px-5">  <div id='container'>
  
  <div v-if="logado">
   <h1  class="pt-3 text-center">Olá {{user.displayName}}, você está logado!</h1>
@@ -244,7 +244,7 @@ a,
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (min-width: 768px){
+@media screen (min-width: 768px){
   .card{
 
       height: 400px;
@@ -269,6 +269,7 @@ a,
   #container{
     grid-template-columns: 1fr 1fr 1fr 1fr;
        background-color: blue;
+      
   }
   
 

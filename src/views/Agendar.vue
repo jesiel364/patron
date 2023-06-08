@@ -10,7 +10,7 @@
 
         <v-card variant="outlined" class="div1">
           <v-avatar >
-            <v-img  src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+            <v-img  :src="barberPic" alt="John"></v-img>
           </v-avatar>
           <div id="barber-name">
             <p>Jean Pierre</p>
@@ -61,13 +61,13 @@
         </div>
 
         <v-card
-        class='mt-4 mb-4 pb-2'
+        class='pt-2 mt-4 mb-4 pb-2'
         v-if="cliente && dateF"
   
 
 >
   
-  <v-card-title><v-icon  >mdi-content-cut</v-icon>    {{corte.item.titulo}}</v-card-title>
+  <v-card-subtitle><v-icon  >mdi-content-cut</v-icon>    {{corte.item.titulo}}</v-card-subtitle>
   <v-card-subtitle><v-icon  >mdi-face-man-shimmer-outline</v-icon>{{cliente}}</v-card-subtitle>
   <v-card-subtitle><v-icon  >mdi-calendar-range</v-icon>{{dateF}}</v-card-subtitle>
   <v-card-subtitle><v-icon  >mdi-currency-brl</v-icon>{{corte.item.valor}},00</v-card-subtitle>
@@ -97,6 +97,8 @@
 
 <script>
 
+import barberPic from '@/assets/hairstylist.png'
+
 import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -116,6 +118,9 @@ const servicos = useCollection(collection(db, 'servicos'), orderBy('valor'))
 
 
 export default {
+	
+	
+	
   setup() {
     const store = userConfig()
 
@@ -139,7 +144,8 @@ export default {
     props: ['modelValue'],
     emits: ['update:modelValue'],
     cliente: '',
-    date: ''
+    date: '',
+    barberPic: barberPic
 
   })
   ,
@@ -247,6 +253,10 @@ h2 {
   padding-left: 10px;
 }
 
+#barber-name small{
+	font-weight: 200;
+}
+
 #price {
   /* background-color: red; */
   margin-right: 20px;
@@ -259,7 +269,7 @@ h2 {
   background: transparent;
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  /*padding: 8px;*/
   border-radius: 10px;
   color: #fefefe;
   margin-top: 16px;

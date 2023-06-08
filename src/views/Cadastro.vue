@@ -88,7 +88,7 @@
               email: data.user.email,
               photo: data.user.photoURL,
               phone: data.user.phoneNumber,
-           
+           		superUser: false
 
 
             });
