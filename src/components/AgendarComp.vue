@@ -7,14 +7,14 @@
     </template>
   
        <v-card :class="{ dark: store.isDark, light: !store.isDark }" >
-       		<v-btn
+       		<!-- <v-btn
         v-if="store.isDark"
         @click="store.isDark = !store.isDark"
         icon="mdi-weather-sunny"
        class="mb-5 mt-5 ml-5"
       ></v-btn>
       <v-btn v-else  @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"
-      class="mb-5 mt-5 ml-5"></v-btn>
+      class="mb-5 mt-5 ml-5"></v-btn> -->
       <div class="form">
 
         <h2>Minha Reserva</h2>
