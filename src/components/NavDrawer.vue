@@ -77,6 +77,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const auth = getAuth(app);
 
+
 export default {
 
   components:{

@@ -1,5 +1,11 @@
 <template>
-  <div class="wrapper px-5">  <div id='container'>
+  <div :class="{ dark: isDark, light: !isDark }" class="wrapper px-5">  <div id='container'>
+
+  <AlertComp  :my-Prop="alerta" />
+
+  
+<v-btn @click="isDark = !isDark">Dark Mode</v-btn>
+       <!-- <v-btn @click="colorMode = 'light'">Light Mode</v-btn>    -->
  
  <div v-if="logado">
   <h1  class="pt-3 text-center">Olá {{user.displayName}}, você está logado!</h1>
@@ -15,6 +21,7 @@
   <div id='form' class="mx-auto">
     <form v-if="!logado" @submit.prevent="submit">
       <h1>Faça o login</h1>
+
 
       <v-text-field
         v-model="email.value.value"
@@ -50,20 +57,37 @@
 </template>
 
 <script>
+import { userConfig } from '@/stores/user'
+import AlertComp from "@/components/AlertComp.vue";
 import router from "@/router";
   import { ref } from 'vue'
   import { useField, useForm } from 'vee-validate'
   import { app } from "../firebase";
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, getRedirectResult, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-  import { getFirestore, collection, addDoc } from "firebase/firestore";
+  import { getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+  addDoc
+} from "firebase/firestore";
 
   const db = getFirestore(app)
 
   const auth = getAuth(app)
 
+const store = userConfig()
 
 
   export default {
+    components:{
+      AlertComp,
+    },
     mounted(){
       this.verify()
     }
@@ -71,21 +95,82 @@ import router from "@/router";
     data(){
       return {
         logado: false,
-        user: ''
+        user: '',
+        already: false,
+        alerta: {message: 'teste', dialog: true},
+        isDark: store.isDark
       }
+
 
     }
     ,
+
     methods: {
+          async consulta(user) {
+      const collectionRef = collection(db, "users");
+
+      const q = await query(
+        collectionRef,
+        // where("uid", "==", id)
+        // orderBy('valor', 'asc')
+      );
+
+
+      let isUser = false
+
+      const servicos = await getDocs(q);
+      servicos.forEach((srv) => {
+
+          let userId = srv.data().uid
+          let userEmail = srv.data().email
+          // console.log(user.uid, userId, userEmail)
+
+          if (userId == user.uid){
+            isUser = true
+          }
+        
+      });
+
+
+      if(isUser == false){
+        // alert('Não cadastrado')
+          try {
+            const docRef = addDoc(collection(db, "users"), {
+              uid: user.uid,
+              id: user.uid,
+              name: user.displayName,
+              email: user.email,
+              photo: user.photoURL,
+              phone: user.phoneNumber,
+              superUser: false
+           
+
+
+            });
+            // console.log("Document written with ID: ", docRef.id);
+           
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            alert(e)
+          }
+          }
+      if(isUser == true){
+            alert('cadastrado')
+          }
+    },
+
+
       verify(){
         onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     this.logado = true
     this.user = user
+    router.push('/')
 
   } else {
     this.logado = false
+    this.alerta = {message: 'N logado', dialog: true}
   }
 });
       },
@@ -113,29 +198,14 @@ signOut(auth).then(() => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    alert(JSON.stringify(user, null, 2))
+    
+    // alert(JSON.stringify(user, null, 2))
+    this.consulta(user)
     this.user = user
 
     // IdP data available using getAdditionalUserInfo(result)
     // ...
-          try {
-            const docRef = addDoc(collection(db, "users"), {
-              uid: user.uid,
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photo: user.photoURL,
-              phone: user.phoneNumber,
-           
 
-
-            });
-            // console.log("Document written with ID: ", docRef.id);
-           
-          } catch (e) {
-            console.error("Error adding document: ", e);
-            alert(e)
-          }
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -181,9 +251,10 @@ signOut(auth).then(() => {
           router.push('/')
         })
         .catch((error) => {
-
+          // alert(ref('alert'))
           alert(error.message)
           console.log("erro")
+         console.log(alerta.value)
         })
       })
 
@@ -195,8 +266,8 @@ signOut(auth).then(() => {
 
 <style scoped>
   .wrapper{
-        background-color: #363636;
-        color: #f8f8f8;
+/*        background-color: #363636;
+        color: #f8f8f8;*/
 
   }
 
@@ -217,7 +288,15 @@ a,
     padding-right: calc(var(--section-gap) / 2);
   }
 
+.dark{
+        background-color: #282828;
+        color: white;
+}
 
+.light{
+        background-color: white;
+        color: #282828;
+}
 
 
 }
@@ -271,7 +350,7 @@ a,
 @media screen (min-width: 1024px){
   #container{
     grid-template-columns: 1fr 1fr 1fr 1fr;
-       background-color: blue;
+/*       background-color: blue;*/
       
   }
   

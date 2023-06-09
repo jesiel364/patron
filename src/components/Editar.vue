@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent width="1024">
     <template v-slot:activator="{ props }">
-      <v-btn density="compact" icon="mdi-pen" color="warning" v-bind="props"> </v-btn>
+      <v-btn class="mx-auto mt-4 mr-1 bg-white"  v-bind="props" icon="mdi-pencil"></v-btn>
     </template>
     <v-card>
       <v-card-title>

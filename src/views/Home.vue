@@ -87,7 +87,7 @@ export default {
 font-family: 'Karantina';
 font-style: normal;
 font-weight: 700;
-font-size: 34px;
+font-size: 75px;
 /*line-height: 65px;*/
 /* identical to box height */
 
@@ -114,7 +114,7 @@ height: 81px;
 font-family: 'Karantina';
 font-style: normal;
 font-weight: 400;
-font-size: 26px;
+font-size: 33px;
 line-height: 34px;
 /* identical to box height */
 letter-spacing: 0.001em;

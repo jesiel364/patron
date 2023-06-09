@@ -13,6 +13,7 @@
     "@mdi/font": "^7.2.96",
     "@popperjs/core": "^2.11.7",
     "@vuepic/vue-datepicker": "^5.0.1",
+    "@vueuse/core": "^10.1.2",
     "firebase": "^9.22.1",
     "moment": "^2.29.4",
     "pinia": "^2.0.36",

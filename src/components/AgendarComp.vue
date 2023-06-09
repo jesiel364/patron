@@ -3,7 +3,7 @@
     <template v-slot:activator="{ props }">
       <!-- <v-btn density="compact" icon="mdi-pen" color="warning" v-bind="props"> </v-btn> -->
        <v-btn  theme="light" v-bind="props"
-              class="ml-8 mt-1 rounded-pill bg-brown" icon="mdi-content-cut"></v-btn>
+              class="ml-8 mt-1 mb-1 rounded-pill bg-brown" icon="mdi-content-cut"></v-btn>
     </template>
   
        <v-card>
@@ -61,7 +61,9 @@
          v-model="cliente"
       ></v-text-field>
 
-<h3 class="mb-2">Confira se está tudo certo</h3>
+<h3 class="mb-2"
+    v-if="cliente && dateF"
+>Confira se está tudo certo</h3>
         </div>
 
         <v-card
@@ -137,7 +139,7 @@ const servicos = useCollection(collection(db, 'servicos'))
     }),
     props: {
     myProp: {
-      type: Object,
+      type: String,
       required: true
     }
   },

@@ -8,6 +8,7 @@
           <th class="text-left">UID</th>
           <th class="text-left">Nome</th>
           <th class="text-left">Email</th>
+          <th class="text-left">Administrado</th>
 
           <th class="text-left">Telefone</th>
           <th class="text-left">Foto</th>
@@ -20,6 +21,8 @@
           </td>
           <td>{{ item.name }}</td>
           <td>{{ item.email }}</td>
+          <td v-if="item.superUser">✅</td>
+          <td v-else>❌</td>
           <td>{{ item.phone }}</td>
           <td v-if="item.photo">
           

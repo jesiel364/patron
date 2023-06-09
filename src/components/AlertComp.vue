@@ -1,44 +1,45 @@
 <template>
-  <div>
-    <v-alert
-      v-model="alert"
-      border="start"
-      variant="tonal"
-      closable
-      close-label="Close Alert"
-      color="deep-purple-accent-4"
-      title="Closable Alert"
+  <div class="text-center">
+    <v-dialog
+      v-model="dialog"
+      width="auto"
     >
-      Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
+      <template v-slot:activator="{ props }">
+<!--         <v-btn
+          color="primary"
+          v-bind="props"
+        >
+          Open Dialog
+        </v-btn> -->
+      </template>
 
-      Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
-    </v-alert>
-
-    <div
-      v-if="!alert"
-      class="text-center"
-    >
-      <v-btn
-
-        @click="alert = true"
-      >
-        Reset
-      </v-btn>
-    </div>
+      <v-card>
+        <v-card-text>
+         {{myProp.message}}
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      alert: true,
-    }),
-
+    data () {
+      return {
+        dialog: false,
+      }
+    },
     props: {
       myProp: {
         type: Object,
         required: true
       }
+    },
+    mounted(){
+      this.dialog = this.myProp.dialog
     }
   }
 </script>

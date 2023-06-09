@@ -79,12 +79,20 @@
 </template>
 
 <script>
+import { userConfig } from '@/stores/user'
+
   export default {
+
+      setup() {
+    const store = userConfig()
+
+    return { store }
+  },
     data: () => ({
       fav: true,
       menu: false,
       message: false,
-      dark: true,
+      dark: true
 
     }),
 
@@ -93,6 +101,33 @@
         type: String,
         required: true
     }
+  },
+
+  methods: {
+    changeMode(){
+      this.store.isDark = this.dark
+      console.log(this.store.isDark)
+      }
+      
+    },
+
+    mounted () {
+    this.changeMode()
+    setInterval(this.changeMode.bind(this) , 1000)
+  },
+
+  computed: {
+    now() {
+      this.store.isDark = this.dark
+      return console.log(this.store.isDark)
+    }
   }
-  }
+
+  
+
+
+
+
+
+}
 </script>

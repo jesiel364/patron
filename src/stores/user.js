@@ -4,7 +4,8 @@ import { ref, computed } from 'vue'
 export const userConfig = defineStore({
     id: 'myStore',
     state: () => ({
-      myObject: {}
+      myObject: {},
+      isDark: true
 
     }),
     actions: {

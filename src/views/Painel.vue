@@ -114,8 +114,6 @@ export default {
 <template>
   <div class="wrapper px-5">
     <h1 class="pt-3 text-center">Página de administração</h1>
-
-
     
         <div v-if="superUser">
         <div v-if="logado" id="container">
@@ -136,15 +134,17 @@ export default {
                 <tbody>
                   <tr v-for="item in list" :key="item.id">
                     <!-- <td>{{ item.id }}</td> -->
-                    <td class="d-flex align-content-center">
-                      <Editar :my-prop="item" />
-                      <v-btn
-                        class="ml-2"
-                        @click="excluir(item.id)"
-                        density="compact"
+                    <td class="d-flex">
+                      <Editar :my-prop="item" /> 
+                                                        <v-btn
+                        class=" mx-auto mt-4 bg-red"
                         icon="mdi-delete"
+                        @click="excluir(item.id)"
+                        
+                        
                         color="red"
                       ></v-btn>
+                      
                     </td>
                     <td>{{ item.titulo }}</td>
                     <td>R${{ item.valor }}</td>
