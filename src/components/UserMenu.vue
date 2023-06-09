@@ -111,10 +111,10 @@ import { userConfig } from '@/stores/user'
       
     },
 
-    mounted () {
-    this.changeMode()
-    setInterval(this.changeMode.bind(this) , 1000)
-  },
+  //   mounted () {
+  //   this.changeMode()
+  //   setInterval(this.changeMode.bind(this) , 1000)
+  // },
 
   computed: {
     now() {

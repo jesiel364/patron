@@ -1,5 +1,6 @@
 <script>
 import { ref } from "vue";
+import { userConfig } from "@/stores/user";
 import addServico from "@/components/addServico.vue";
 import Editar from "@/components/Editar.vue";
 import Users from "@/components/Users.vue";
@@ -29,6 +30,11 @@ const list = useCollection(servicosCol);
 const users = useCollection(collection(db, "users"));
 
 export default {
+	setup(){
+		const store = userConfig()
+		return { store }
+	}
+	,
   components: {
     addServico,
     Editar,
@@ -112,7 +118,15 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper px-5">
+  <div :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5">
+  	 <v-btn
+      class="mt-5 mb-5"
+        v-if="store.isDark"
+        @click="store.isDark = !store.isDark"
+        icon="mdi-weather-sunny"
+        
+      ></v-btn>
+      <v-btn class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
     <h1 class="pt-3 text-center">Página de administração</h1>
     
         <div v-if="superUser">
@@ -120,7 +134,7 @@ export default {
 
             <div id="div1">
               <h2>Serviços</h2>
-              <v-table height='400px' theme="dark" id="table">
+              <v-table :class="{ tdark: store.isDark, tlight: !store.isDark }"  height='400px'  id="table">
                 <thead>
                   <tr>
                     <!-- <th class="text-left">ID</th> -->
@@ -175,7 +189,7 @@ export default {
           </div>
 
       <div id=" " class="card mt-5">
-            <Users :my-prop="users" />
+            <Users :class="{ tdark: store.isDark, tlight: !store.isDark }" :my-prop="users" />
 </div>
         </div>
 
@@ -230,8 +244,7 @@ export default {
 }
 #container {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--fundo);
+  
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -253,9 +266,25 @@ a,
 .card {
 }
 
-.wrapper {
-  background-color: #363636;
+.dark{
+	background-color: #363636;
   color: #fafafa;
+}
+.light{
+	background-color: #fafafa;
+  color: #363636;
+}
+.tdark{
+	background-color: #282828;
+  color: white;
+}
+.tlight{
+	background-color: #EEEEEE;
+  color: #282828;
+}
+
+.wrapper {
+  
   height: 100%;
 
 }

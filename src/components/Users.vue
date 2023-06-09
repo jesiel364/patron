@@ -1,7 +1,7 @@
 <template>
   <div id="div1">
     <h2>Usuários</h2>
-    <v-table theme="dark" id="table">
+    <v-table id="table">
       <thead>
         <tr>
           <!-- <th class="text-left">ID</th> -->

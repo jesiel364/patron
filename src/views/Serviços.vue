@@ -1,10 +1,24 @@
 <template>
-  <div class="wrapper">
+ 
+  	 <div
+   
+    id="container"
+    class="wrapper"
+  >
+    
 
     <div class="container">
-     
+   
 
-      <v-card id="content" theme='dark' class="mx-auto pt-5 ">
+      <v-card  :class="{ dark: store.isDark, light: !store.isDark }" id="content"  class="mx-auto pt-5 ">
+      	
+      	<v-btn
+        v-if="store.isDark"
+        @click="colorChange()"
+        icon="mdi-weather-sunny"
+       
+      ></v-btn>
+      <v-btn v-else @click="colorChange()" icon="mdi-weather-night" color="black"></v-btn>
         <div class="divs">
           <div class="box">
             <logo_small class='text-center mb-5' id='logo' />
@@ -79,9 +93,19 @@ export default {
       // },
       enviarObjeto(item) {
       this.$router.push({ name: 'agendar', params: { item: JSON.stringify(item) } })
+    },
+    colorChange(){
+    	if(this.store.isDark){
+    		this.isDark = false
+    		this.store.isDark = false
+    	} else {
+    		this.isDark = true 
+    		this.store.isDark = true
+    	}
+    	
     }
      
-  }
+    }
   ,
     components: {
 
@@ -98,13 +122,24 @@ export default {
         date: '10, Mai 2023',
         mess: 'Funcionamos todos os dias das 8h ás 19h!'
       },
-      servicos : servicos
+      servicos : servicos,
+      isDark: true,
     }),
 }
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap');
+
+
+.dark{
+	background-color: #282828 ;
+	color: white;
+}
+.light{
+	background-color: #EFEBE9;
+	color: #282828 ;
+}
 
 .box {
   /*background-color: blue;*/
@@ -126,7 +161,7 @@ export default {
   background-size: cover;
   align-items: center;
 
-  background-color: red;
+  
   align-items: center;
   padding-top: 20PX;
   width: 100%;

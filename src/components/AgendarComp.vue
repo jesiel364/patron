@@ -6,13 +6,21 @@
               class="ml-8 mt-1 mb-1 rounded-pill bg-brown" icon="mdi-content-cut"></v-btn>
     </template>
   
-       <v-card>
-      <div class="form bg-dark">
+       <v-card :class="{ dark: store.isDark, light: !store.isDark }" >
+       		<v-btn
+        v-if="store.isDark"
+        @click="store.isDark = !store.isDark"
+        icon="mdi-weather-sunny"
+       class="mb-5 mt-5 ml-5"
+      ></v-btn>
+      <v-btn v-else  @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"
+      class="mb-5 mt-5 ml-5"></v-btn>
+      <div class="form">
 
         <h2>Minha Reserva</h2>
 
 
-        <v-card variant="outlined" class="div1">
+        <v-card :class="{ ddiv1: store.isDark, ldiv1: !store.isDark }"   c>
           <v-avatar >
             <v-img  :src="barberPic" alt="John"></v-img>
           </v-avatar>
@@ -41,7 +49,7 @@
   
         <div class="mx-auto text-center">
 
-        <VueDatePicker :min-date="new Date()" teleport-center=true id="date" placeholder="Que dia deseja?" :dark="true" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
+        <VueDatePicker :min-date="new Date()" teleport-center=true id="date" placeholder="Que dia deseja?" :dark="store.isDark" class="mt-5" locale="pt-BR" v-model="date" week-numbers="iso"
           cancel-text="Fechar"
           select-text="Selecionar"
         ></VueDatePicker>
@@ -115,7 +123,7 @@
 
 <script>
 import barberPic from '@/assets/hairstylist.png'
-
+import { userConfig } from '@/stores/user'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import moment from 'moment';
 
@@ -128,6 +136,11 @@ const db = getFirestore(app);
 const servicos = useCollection(collection(db, 'servicos'))
 
   export default {
+  	setup(){
+  		const store = userConfig()
+  		return { store }
+  	}
+  	,
     data: () => ({
       dialog: false,
       date: '',
@@ -184,13 +197,34 @@ const servicos = useCollection(collection(db, 'servicos'))
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;700&display=swap');
 
 
+
+.dark{
+	background-color: #363636 ;
+	color: white;
+}
+
+
+.light{
+	background-color: #F5F5F5;
+	color: #282828 ;
+}
+
+.ldiv1{
+	background-color: #eeeeee;
+	color: #282828 ;
+}
+
+.ddiv1{
+	background-color: #282828;
+	color: #F5F5F5 ;
+}
 body,
 html {}
 
 .wrapper {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center;
   background-size: cover;
-  background-color: red;
+  
   transform: scale(1.1);
   width: 100%;
   max-width: 100vw;
@@ -202,7 +236,7 @@ html {}
 }
 
 #container{
-  background-color: #282828;
+ 
 /*  width: 500px;
   margin: auto;
   align-items: center;
@@ -216,7 +250,7 @@ html {}
   font-family: 'PT Sans', sans-serif;
   align-items: center;
   /* display: flex; */
-  color: #f7efef;
+  
   padding: 20px;
   /* margin-top: 64px; */
   height: 100%;
@@ -235,7 +269,6 @@ h2 {
   justify-content: space-between;
   padding: 8px;
   border-radius: 10px;
-  color: #fefefe;
   margin-top: 16px;
 }
 
@@ -266,12 +299,10 @@ h2 {
 
 
 .div2 {
-  background: transparent;
   display: flex;
   justify-content: space-between;
   /*padding: 8px;*/
   border-radius: 10px;
-  color: #fefefe;
   margin-top: 16px;
   /* text-transform: uppercase; */
 }
