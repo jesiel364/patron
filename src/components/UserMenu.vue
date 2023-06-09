@@ -48,7 +48,7 @@
 
           <v-list-item>
             <v-switch
-              v-model="dark"
+              v-model="store.isDark"
               color="green"
               label="Modo Escuro"
               hide-details

@@ -53,15 +53,29 @@ export default {
       photoNull: photoPic,
       alert: true,
       alert2: true,
+      mode: 'dark'
     };
   },
 
   created() {
     // this.getServicos()
     this.verify();
+    this.colorMode()
   },
 
   methods: {
+  	colorMode(){
+  		if(this.store.isDark == true){
+  			this.mode = "dark"
+  			this.store.isDark = true
+  		} else{
+  			this.mode = "light"
+  			this.store.isDark = false
+  		}
+  			
+  		}
+  			,
+  	
     verify() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -134,7 +148,8 @@ export default {
 
             <div id="div1">
               <h2>Serviços</h2>
-              <v-table :class="{ tdark: store.isDark, tlight: !store.isDark }"  height='400px'  id="table">
+           
+              <v-table v-bind:theme="mode"   height='400px'  id="table">
                 <thead>
                   <tr>
                     <!-- <th class="text-left">ID</th> -->
@@ -189,7 +204,7 @@ export default {
           </div>
 
       <div id=" " class="card mt-5">
-            <Users :class="{ tdark: store.isDark, tlight: !store.isDark }" :my-prop="users" />
+            <Users :my-prop="[users, mode]" />
 </div>
         </div>
 

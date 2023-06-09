@@ -1,7 +1,7 @@
 <template>
   <div id="div1">
     <h2>Usuários</h2>
-    <v-table id="table">
+    <v-table  v-bind:theme="myProp[1]" id="table">
       <thead>
         <tr>
           <!-- <th class="text-left">ID</th> -->
@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in myProp">
+        <tr v-for="item in myProp[0]">
           <td>
             <small>{{ item.uid }}</small>
           </td>
@@ -48,7 +48,7 @@ import userPic from '@/assets/user.png'
 export default {
   props: {
     myProp: {
-      type: String,
+      type: Array,
       required: true,
     },
  

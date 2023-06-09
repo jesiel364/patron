@@ -38,6 +38,7 @@
             :counter="0"
             :error-messages="pwd.errorMessage.value"
             label="Senha"
+            type="password"
           ></v-text-field>
 
           <router-link to="/cadastro">Não tem conta?</router-link><br />

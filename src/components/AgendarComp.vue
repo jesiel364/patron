@@ -20,7 +20,7 @@
         <h2>Minha Reserva</h2>
 
 
-        <v-card :class="{ ddiv1: store.isDark, ldiv1: !store.isDark }"   c>
+        <v-card class="div1" :class="{ ddiv1: store.isDark, ldiv1: !store.isDark }">
           <v-avatar >
             <v-img  :src="barberPic" alt="John"></v-img>
           </v-avatar>

@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
-    <v-navigation-drawer v-model="drawer" theme="dark"
+    <v-navigation-drawer v-model="drawer" v-bind:theme="mode"
+    
       >
+    	<p>{{theme }}</p>
       <v-list v-if="user">
           <v-list-item
             
@@ -71,6 +73,7 @@
 </template>
 
 <script>
+import { userConfig } from '@/stores/user'
 import UserMenu from '@/components/UserMenu.vue'
 import { app } from "../firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -79,22 +82,52 @@ const auth = getAuth(app);
 
 
 export default {
+setup(){
+	const store = userConfig()
+	return { store }
+}
 
+,
   components:{
     UserMenu
   },
   data: () => ({
     drawer: null,
     logado: false,
-    user: ''
+    user: '',
+    mode: "light",
+    theme: ''
   }),
 
   created() {
     // this.getServicos()
     this.verify();
-  },
+    this.getTheme()
+  }
+  
+  ,
+  computed: {
+  	now(){
+  		if(this.store.isDark == true){
+  			this.theme = "dark"
+  		}else{
+  			this.theme = "light"
+  		}
+  	}
+  }
+  ,
 
   methods: {
+  	getTheme(){
+  		if(this.store.isDark == true){
+  			this.mode = "dark"
+  			this.store.isDark = true
+  		}else{
+  			this.mode = "light"
+  			this.store.isDark = false
+  		}
+  	}
+  	,
     verify() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
