@@ -79,6 +79,7 @@ export default {
     verify() {
       onAuthStateChanged(auth, (user) => {
         if (user) {
+          this.user = user
           const uid = user.uid;
           this.uid = uid;
           this.consulta(uid)
@@ -112,7 +113,10 @@ export default {
       servicos.forEach((srv) => {
         const data = srv.data()
         const userId = srv.data().uid
+        this.servicos.push(data)
+
         if (userId == id){
+          this.store.setMyObject(data)
         	// alert(data.superUser)
         	if( data.superUser){
         		this.superUser = true
@@ -124,6 +128,8 @@ export default {
         	// alert("Não é igual")
         }
       });
+
+      
     },
 
 
@@ -142,6 +148,7 @@ export default {
       ></v-btn>
       <v-btn class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
     <h1 class="pt-3 text-center">Página de administração</h1>
+
     
         <div v-if="superUser">
         <div v-if="logado" id="container">

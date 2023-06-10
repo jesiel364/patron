@@ -13,12 +13,13 @@
         </v-btn> -->
       </template>
 
-      <v-card>
+      <v-card :theme="mode">
         <v-card-text>
-         {{myProp.message}}
+         {{myProp[0].message}}
+
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+          <v-btn color="primary" block @click="dialog = false">Okay</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -34,12 +35,17 @@
     },
     props: {
       myProp: {
-        type: Object,
-        required: true
+        type: Array,
+        required: false
       }
     },
     mounted(){
-      this.dialog = this.myProp.dialog
+      this.dialog = this.myProp[0].dialog
+      if(this.myProp[1]){
+        this.mode = "dark"
+      }else{
+        this.mode = "light"
+      }
     }
   }
 </script>

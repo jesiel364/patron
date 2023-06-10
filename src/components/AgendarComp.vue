@@ -6,7 +6,7 @@
               class="ml-8 mt-1 mb-1 rounded-pill bg-brown" icon="mdi-content-cut"></v-btn>
     </template>
   
-       <v-card :class="{ dark: store.isDark, light: !store.isDark }" >
+       <v-card class="mx-auto" style="max-width: 500px;" :class="{ dark: store.isDark, light: !store.isDark }" >
        		<!-- <v-btn
         v-if="store.isDark"
         @click="store.isDark = !store.isDark"

@@ -9,7 +9,7 @@
             
             v-bind:prepend-avatar="user.photoURL"
             title="Yda Jean Barber"
-            v-bind:subtitle="user.email"
+            subtitle="Rua Curió, 575 - São Bento"
           >
             <template v-slot:append>
 

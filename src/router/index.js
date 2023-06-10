@@ -47,6 +47,13 @@ const router = createRouter({
       path: '/painel',
       name: 'painel',
       component: () => import('../views/Painel.vue')
+    } ,               
+
+    {
+
+      path: '/redefinir',
+      name: 'redefinir',
+      component: () => import('../views/forgotPass.vue')
     }
   ]
 })

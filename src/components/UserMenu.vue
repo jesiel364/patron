@@ -20,9 +20,10 @@
         <v-list>
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-            v-bind:title="myProp.displayName"
-            subtitle="Administrador"
+           :title="userName"
+          :subtitle="userEmail"
           >
+
             <template v-slot:append>
               <v-btn
                 variant="text"
@@ -35,6 +36,7 @@
         </v-list>
 
         <v-divider></v-divider>
+      
 
         <v-list>
           <v-list-item>
@@ -92,7 +94,10 @@ import { userConfig } from '@/stores/user'
       fav: true,
       menu: false,
       message: false,
-      dark: true
+      dark: true,
+      userName: 'user',
+      userEmail: 'email',
+
 
     }),
 
@@ -111,10 +116,10 @@ import { userConfig } from '@/stores/user'
       
     },
 
-  //   mounted () {
-  //   this.changeMode()
-  //   setInterval(this.changeMode.bind(this) , 1000)
-  // },
+    mounted () {
+      this.userName = this.store.myObject.name
+      this.userEmail = this.store.myObject.email
+  },
 
   computed: {
     now() {

@@ -1,7 +1,8 @@
 <template>
   <div :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5">
-    <div id="container">
-      <AlertComp :my-Prop="alerta" />
+    <div  id="container">
+      <AlertComp v-if="logado" :my-Prop="[{message: 'Você está logado.', dialog: true}, store.isDark]" />
+      <AlertComp v-if="alerta[0]" :my-Prop="[alerta, store.isDark]" />
 
       <v-btn
       class="mt-5 mb-5"
@@ -23,9 +24,10 @@
           <v-img :src="user.photoURL" alt="John"></v-img>
         </v-avatar>
       </div>
-      <div id="form" class="mx-auto">
-        <form v-if="!logado" @submit.prevent="submit">
-          <h1>Faça o login</h1>
+      <div style="max-width: 400px" id="form" class="mx-auto">
+        <form style="max-width: 400px;" v-if="!logado" @submit.prevent="submit">
+          <h1 class="">Faça o login</h1>
+          <strong class="text-red">{{errorMessage}}</strong>
 
           <v-text-field
             v-model="email.value.value"
@@ -41,19 +43,28 @@
             type="password"
           ></v-text-field>
 
-          <router-link to="/cadastro">Não tem conta?</router-link><br />
+          <v-container class="w-100 m-0 px-0">
+            <v-row justify="space-between" class="pr-0 mr-0"  >
+              <v-col class=" pl-0
+          "   align-self="start"><router-link to="/cadastro">Não tem conta?</router-link></v-col>
+              <v-col class=" text-right px-0
+          "><router-link class="" to="/redefinir">Esqueceu a senha</router-link></v-col>
+            </v-row>
+          </v-container>
 
-          <v-container>
-          	<v-row justify="start">
-          		<v-col>
-          			<v-btn color="success" class="me-4" type="submit"> Entrar </v-btn>
+          <v-container class="mx-0 px-0">
+          	<v-row
+             style='max-width: 400px; ' justify="center">
+          		<v-col class="ml-0 pl-0">
+          			<v-btn :disabled="loading" 
+        :loading="loading" color="success" class="me-4" type="submit"> Entrar </v-btn>
           			
           		</v-col>
-          		<v-col>
+          		<v-col class="ml-0 pl-0 pr-0 mr-0" >
           			<v-btn
               variant="outlined"
               prepend-icon="mdi-google"
-              class=""
+              class="w-100"
               @click="signWithGoogle()"
               >Entrar com o Google</v-btn
             >
@@ -92,6 +103,7 @@ import {
   getRedirectResult,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -124,11 +136,16 @@ export default {
       logado: false,
       user: "",
       already: false,
-      alerta: { message: "teste", dialog: true },
+      // alerta: { message: "teste", dialog: true },
       isDark: true ,
+      loading: false,
+      resetLink: ''
     };
   },
   methods: {
+
+
+    
     async consulta(user) {
       const collectionRef = collection(db, "users");
 
@@ -162,6 +179,7 @@ export default {
             photo: user.photoURL,
             phone: user.phoneNumber,
             superUser: false,
+            configs: {darkMode: true, primaryColor: "brown"}
           });
           // console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -180,10 +198,13 @@ export default {
           const uid = user.uid;
           this.logado = true;
           this.user = user;
-          router.push("/");
+          
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
         } else {
           this.logado = false;
-          this.alerta = { message: "N logado", dialog: true };
+          // this.alerta = { message: "N logado", dialog: true };
         }
       });
     },
@@ -195,6 +216,7 @@ export default {
 
           this.logado = false;
           router.push("/");
+
         })
         .catch((error) => {
           // An error happened.
@@ -254,23 +276,39 @@ export default {
     const email = useField("email");
     const auth = getAuth(app);
     const logado = ref("logado");
-
+    let errorMessage = ref('')
+    let alerta = ref('')
+   
+    let loading = ref(false)
     const submit = handleSubmit((values) => {
       // alert(JSON.stringify(values, null, 2))
+       loading.value = true
       signInWithEmailAndPassword(auth, values.email, values.pwd)
         .then((data) => {
-          console.log("success");
-          router.push("/");
+          // console.log("success");
+          loading.value = false
+          setTimeout(() => {
+  router.push("/");
+}, 3000);
+          
         })
         .catch((error) => {
           // alert(ref('alert'))
-          alert(error.message);
-          console.log("erro");
-          console.log(alerta.value);
+          console.log(error)
+          // loading = true
+          loading.value = false
+
+          if(error.code == 'auth/user-not-found'){
+            alerta.value = {message: 'Usuário não encontrado.', dialog: true} 
+            errorMessage.value = 'Usuário não encontrado.' 
+            
+          }
+          
+          
         });
     });
 
-    return { email, pwd, submit, handleReset, store };
+    return { email, pwd, submit, handleReset, store, errorMessage, loading, alerta };
   },
 };
 </script>

@@ -17,16 +17,31 @@
     <h1 class="pt-3">Criar conta</h1>
     <form @submit.prevent="submit">
       <v-text-field
+        v-model="nome.value.value"
+        :error-messages="nome.errorMessage.value"
+        label="Nome"
+      ></v-text-field>
+
+      <v-text-field
         v-model="email.value.value"
         :error-messages="email.errorMessage.value"
         label="E-mail"
       ></v-text-field>
 
       <v-text-field
+        v-model="telefone.value.value"
+        :error-messages="telefone.errorMessage.value"
+        label="Telefone"
+      ></v-text-field>  
+      
+
+      <v-text-field
         v-model="pwd.value.value"
         :error-messages="pwd.errorMessage.value"
         label="Senha"
       ></v-text-field>
+
+
 
       <div class="text-center">
         <v-btn color="green" class="me-4" type="submit"> Criar conta </v-btn>
@@ -57,6 +72,12 @@ export default {
   setup() {
     const { handleSubmit, handleReset } = useForm({
       validationSchema: {
+        nome(value) {
+          if ((value)) return true;
+
+          return "Insira seu nome.";
+        },
+
         email(value) {
           if (/^[a-z0-9.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true;
 
@@ -64,19 +85,31 @@ export default {
         },
         pwd(value) {
           if (value?.length > 8 && /[0-9-]+/.test(value)) return true;
-          return "A senha precisa";
+          return "A senha conter números e letras";
+        },
+
+
+
+
+
+        telefone(value) {
+          if (value?.length > 8 && /[0-9-]+/.test(value)) return true;
+          return "Digite um número de telefone válido.";
         },
       },
     });
     
     const store = userConfig()
 
+    const nome = useField("nome");
     const email = useField("email");
+    const telefone = useField("telefone");
     const pwd = useField("pwd");
+
     const auth = getAuth(app);
 
     const submit = handleSubmit((values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       createUserWithEmailAndPassword(auth, values.email, values.pwd)
         .then((data) => {
           alert("Usuário registrado com sucesso");
@@ -86,11 +119,12 @@ export default {
             const docRef = addDoc(collection(db, "users"), {
               uid: data.user.uid,
               id: data.user.uid,
-              name: data.user.displayName,
+              name: values.nome,
               email: data.user.email,
               photo: data.user.photoURL,
-              phone: data.user.phoneNumber,
+              phone: values.telefone,
               superUser: false,
+              configs: {darkMode: true, primaryColor: "brown"}
             });
             // console.log("Document written with ID: ", docRef.id);
           } catch (e) {
@@ -104,7 +138,7 @@ export default {
         });
     });
 
-    return { email, pwd, submit, handleReset, store };
+    return { email, pwd, submit, handleReset, store, nome, telefone };
   },
 };
 </script>
