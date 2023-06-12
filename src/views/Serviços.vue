@@ -9,8 +9,9 @@
 
     <div class="container">
    
-
       <v-card  :class="{ dark: store.isDark, light: !store.isDark }" id="content"  class="mx-auto pt-5 ">
+      	
+      	
       	
       	<v-btn
         v-if="store.isDark"
@@ -68,6 +69,7 @@
 import { userConfig } from '@/stores/user'
 import logo_small from '../components/logo_sm.vue'
 import messComp from '../components/messComp.vue'
+import Skeleton from '../components/Skeleton.vue'
 import AgendarComp from '../components/AgendarComp.vue'
 
 import { getFirestore } from "firebase/firestore";
@@ -111,7 +113,8 @@ export default {
 
       logo_small,
         messComp,
-        AgendarComp
+        AgendarComp,
+        Skeleton
 
     },
     data: () => ({
@@ -124,6 +127,7 @@ export default {
       },
       servicos : servicos,
       isDark: true,
+     
     }),
 }
 </script>

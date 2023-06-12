@@ -13,9 +13,9 @@
     ></v-btn>
     <v-btn
     class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
-
+	<div style="max-width: 400px;" class="mx-auto">
     <h1 class="pt-3">Criar conta</h1>
-    <form @submit.prevent="submit">
+    <form   @submit.prevent="submit">
       <v-text-field
         v-model="nome.value.value"
         :error-messages="nome.errorMessage.value"
@@ -49,6 +49,7 @@
       <router-link to="/login">Se já tem um conta, clique aqui.</router-link
       ><br />
     </form>
+  </div>
   </div>
 </template>
 

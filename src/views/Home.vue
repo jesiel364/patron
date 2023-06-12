@@ -3,6 +3,7 @@
     <div class="mx-auto mb-0" id="frame">
     <v-card-text class='' id='title' theme='light'>
    <h1>   Yda Jean BarberShop </h1> 
+
    <h2 class="text-center mt-1" id='sub'>Expert em serviços de barba e cabelo</h2>
 
    <p id='text'>"Desperte seu estilo na Barbearia <strong>YDAJEAN</strong>: Cortes precisos, barbas impecáveis e um ambiente único. Nossos barbeiros especializados estão prontos para transformar sua aparência. Descubra a excelência em cuidados masculinos e garanta um visual impecável.</p> 
@@ -10,7 +11,7 @@
    <p id='text'>Agende seu horário e experimente a arte da barbearia no seu melhor. Venha para a Barbearia <strong>YdaJean</strong> e deixe-nos cuidar do seu estilo com maestria."</p><br>
 
    <div class="" id='bt-div'>
-   <v-btn to="/servicos" class='mx-auto' id='bt'>ver serviços</v-btn>
+   <v-btn to="/servicos" class='mx-auto' id='bt'>Ver serviços</v-btn>
  </div>
 
 

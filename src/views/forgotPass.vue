@@ -1,8 +1,14 @@
 <template>
+	<div class="wrapper px-5 ">
+		
+	<div style="max-width: 400px" class="mx-auto pt-5 " id="container">
 	<h1>Redefinição de senha</h1>
 
 		<v-text-field label="Digite seu Email" v-model="email"></v-text-field>
 		<v-btn @click="redefinirSenha()">Enviar</v-btn>
+		
+</div>
+</div>
 </template>
 
 <script>
