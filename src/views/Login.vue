@@ -48,7 +48,7 @@
               <v-col class=" pl-0
           "   align-self="start"><router-link to="/cadastro">Não tem conta?</router-link></v-col>
               <v-col class=" text-right px-0
-          "><router-link class="" to="/redefinir">Esqueceu a senha</router-link></v-col>
+          "><router-link class="" to="/redefinir">Esqueceu a senha?</router-link></v-col>
             </v-row>
           </v-container>
 
@@ -315,7 +315,7 @@ export default {
 
 <style scoped>
 .dark {
-  background-color: #282828;
+  background-color: #363636 ;
   color: white;
 }
 
@@ -356,9 +356,8 @@ a,
 
 #container {
   min-height: 100vh;
-  color: var(--color-text);
-  background-color: var(--vt-c-black);
-  transition: color 0.5s, background-color 0.5s;
+  
+  
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",

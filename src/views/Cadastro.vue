@@ -5,7 +5,7 @@
     class="wrapper px-5"
   >
     <v-btn
-    class="mt-5 mb-5"
+    class="mt-5 mb-1"
       v-if="store.isDark"
       @click="store.isDark = !store.isDark"
       icon="mdi-weather-sunny"
@@ -41,13 +41,13 @@
         label="Senha"
       ></v-text-field>
 
+  <router-link to="/login">Se já tem um conta, clique aqui.</router-link
+      ><br />
 
-
-      <div class="text-center">
+      <div class="text-center mt-5">
         <v-btn color="green" class="me-4" type="submit"> Criar conta </v-btn>
       </div>
-      <router-link to="/login">Se já tem um conta, clique aqui.</router-link
-      ><br />
+    
     </form>
   </div>
   </div>
@@ -146,7 +146,7 @@ export default {
 
 <style>
 .dark {
-  background-color: #282828;
+  background-color: #363636;
   color: white;
 }
 
