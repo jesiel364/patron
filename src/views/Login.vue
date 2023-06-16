@@ -237,6 +237,7 @@ export default {
           // alert(JSON.stringify(user, null, 2))
           this.consulta(user);
           this.user = user;
+          this.store.setMyObject(user)
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...

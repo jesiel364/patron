@@ -14,13 +14,25 @@
 	<div style="max-width: 400px" class="mx-auto pt-5 " id="container">
 	<h1>Meu perfil</h1>
 	
-  <div class="d-flex align-center justify-space-around mt-5">
+  <div class="align-center text-center mt-5">
 
-    <v-avatar color="info" size="x-large">
-      64
-    </v-avatar>
+      <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 100px; height: 100px; border-radius: 100%;">
+      <img class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="store.myObject.photo">
+    </div>
+
+    <p style="font-size: 24px;" class="mt-5 font-weight-bold">{{store.myObject.name}}</p>
   </div>
 
+  <div>
+    <ul>
+      <li>Histórico de serviços</li>
+      <li>Planos</li>
+      <li>Deslogar</li>
+    </ul>
+  </div>
+
+
+<!-- {{store.myObject}} -->
 
 
 		
