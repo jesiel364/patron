@@ -29,6 +29,7 @@
       </v-list>
       <v-divider></v-divider>
       <v-list nav>
+      	<p>{{superUser}}</p>
         <v-list-item
           prepend-icon="mdi-home"
           :to="{ path: '/' }"
@@ -46,10 +47,16 @@
           title="Entrar"
         ></v-list-item>
         <v-list-item
-        v-if="logado"
+        v-if="superUser"
           prepend-icon="mdi-table-cog"
           :to="{ path: '/painel' }"
           title="Painel"
+        ></v-list-item>
+        <v-list-item
+        v-if="logado"
+          prepend-icon="mdi-account"
+          :to="{ path: '/perfil' }"
+          title="Perfil"
         ></v-list-item>
         <v-divider></v-divider>
         <v-list-item
@@ -77,9 +84,21 @@ import { userConfig } from '@/stores/user'
 import UserMenu from '@/components/UserMenu.vue'
 import { app } from "../firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
+
+import { getFirestore } from "firebase/firestore";
 
 const auth = getAuth(app);
-
+const db = getFirestore(app);
 
 export default {
 setup(){
@@ -96,7 +115,8 @@ setup(){
     logado: false,
     user: '',
     mode: "light",
-    theme: ''
+    theme: '',
+    superUser: true,
   }),
 
   created() {
@@ -135,6 +155,9 @@ setup(){
           console.log("logado");
           this.logado = true;
           this.user = user
+          
+          this.consulta(uid)
+          
         } else {
           this.logado = false;
           this.user = ''
@@ -156,6 +179,41 @@ setup(){
           alert(error);
 
         });
+    },
+    
+     async consulta(id) {
+      const collectionRef = collection(db, "users");
+
+      const q = await query(
+        collectionRef,
+        where("id", "==", id)
+        // orderBy('valor', 'asc')
+      );
+
+      const servicos = await getDocs(q);
+      servicos.forEach((srv) => {
+        const data = srv.data()
+        const userId = srv.data().uid
+        this.servicos.push(data)
+        alert(id)
+
+        if (userId == id){
+          this.store.setMyObject(data)
+        	// alert(data.superUser)
+        	if( data.superUser){
+        		alert("superUser")
+        		this.superUser = true
+        		// alert(id)
+        	} else{
+        		this.superUser = false
+        		alert("NoSuperUser")
+        	}
+        } else{
+        	// alert("Não é igual")
+        }
+      });
+
+      
     },
   },
 };

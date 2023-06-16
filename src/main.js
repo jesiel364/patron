@@ -8,11 +8,11 @@ import router from './router'
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { firestorePlugin } from 'vuefire'
+
 import { createPinia } from 'pinia'
 
 import { firebaseApp } from './firebase'
-import { VueFire, VueFireAuth } from 'vuefire'
+import {firestorePlugin, VueFire, VueFireAuth } from 'vuefire'
 
 const app = createApp(App)
 

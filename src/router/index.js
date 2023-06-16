@@ -54,6 +54,13 @@ const router = createRouter({
       path: '/redefinir',
       name: 'redefinir',
       component: () => import('../views/forgotPass.vue')
+    },
+
+    {
+
+      path: '/perfil',
+      name: 'perfil',
+      component: () => import('../views/Perfil.vue')
     }
   ]
 })
