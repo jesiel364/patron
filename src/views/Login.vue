@@ -125,6 +125,8 @@ const auth = getAuth(app);
 
 
 export default {
+
+
   components: {
     AlertComp,
   },

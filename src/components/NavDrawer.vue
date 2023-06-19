@@ -3,7 +3,6 @@
     <v-navigation-drawer v-model="drawer" v-bind:theme="mode"
     
       >
-    	<p>{{theme }}</p>
       <v-list v-if="user">
           <v-list-item
             
@@ -29,7 +28,7 @@
       </v-list>
       <v-divider></v-divider>
       <v-list nav>
-      	<p>{{superUser}}</p>
+      	<!--<p>{{superUser}}</p>-->
         <v-list-item
           prepend-icon="mdi-home"
           :to="{ path: '/' }"
@@ -116,7 +115,7 @@ setup(){
     user: '',
     mode: "light",
     theme: '',
-    superUser: true,
+    superUser: false,
   }),
 
   created() {

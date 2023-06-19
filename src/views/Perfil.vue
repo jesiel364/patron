@@ -17,7 +17,10 @@
   <div class="align-center text-center mt-5">
 
       <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 100px; height: 100px; border-radius: 100%;">
-      <img class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="store.myObject.photo">
+      <img v-if="store.myObject.photo" class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="store.myObject.photo" />
+      <img v-else class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="UserPic" />
+      
+      
     </div>
 
     <p style="font-size: 24px;" class="mt-5 font-weight-bold">{{store.myObject.name}}</p>
@@ -32,7 +35,7 @@
   </div>
 
 
-<!-- {{store.myObject}} -->
+ {{store.myObject}} 
 
 
 		
@@ -57,6 +60,7 @@
 </style>
 
 <script>
+import UserPic from "@/assets/user.png"
 import { userConfig } from "@/stores/user";
 import { app } from "../firebase";
 import {
@@ -83,7 +87,8 @@ export default{
 
 	data() {
 		return {
-			email: ''
+			email: '',
+			UserPic: UserPic,
 		}
 	},
 
