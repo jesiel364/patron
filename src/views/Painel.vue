@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { userConfig } from "@/stores/user";
 import addServico from "@/components/addServico.vue";
 import Editar from "@/components/Editar.vue";
+import circularProgress from "@/components/circularProgress.vue";
 import Users from "@/components/Users.vue";
 import AgendarComp from "@/components/AgendarComp.vue";
 import photoPic from "@/assets/photo-pic.png";
@@ -40,6 +41,7 @@ export default {
     Editar,
     Users,
     AgendarComp,
+    circularProgress
   },
   data() {
     return {
@@ -152,6 +154,8 @@ export default {
     
         <div v-if="superUser">
         <div v-if="logado" id="container">
+
+          <circularProgress />
 
             <div id="div1">
               <h2>Serviços</h2>
