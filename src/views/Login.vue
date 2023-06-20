@@ -1,7 +1,7 @@
 <template>
   <div :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5">
     <div  id="container">
-      <AlertComp v-if="logado" :my-Prop="[{message: 'Você está logado.', dialog: true}, store.isDark]" />
+      <!-- <AlertComp v-if="logado" :my-Prop="[{message: 'Você está logado.', dialog: true}, store.isDark]" /> -->
       <AlertComp v-if="alerta[0]" :my-Prop="[alerta, store.isDark]" />
 
       <v-btn
@@ -190,7 +190,7 @@ export default {
         }
       }
       if (isUser == true) {
-        alert("cadastrado");
+        // alert("cadastrado");
       }
     },
 
@@ -203,7 +203,7 @@ export default {
           
           setTimeout(() => {
             router.push("/");
-          }, 3000);
+          }, 1000);
         } else {
           this.logado = false;
           // this.alerta = { message: "N logado", dialog: true };
@@ -239,7 +239,7 @@ export default {
           // alert(JSON.stringify(user, null, 2))
           this.consulta(user);
           this.user = user;
-          this.store.setMyObject(user)
+          
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...

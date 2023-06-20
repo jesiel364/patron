@@ -1,61 +1,98 @@
 <template>
-	<div  :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5 ">
+	<div  :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5 pb-5">
 		
-		 <!--<v-btn-->
-   <!-- class="mt-5 mb-5"-->
-   <!--   v-if="store.isDark"-->
-   <!--   @click="store.isDark = !store.isDark"-->
-   <!--   icon="mdi-weather-sunny"-->
+		 <v-btn
+    class="mt-5 mb-5"
+      v-if="store.isDark"
+      @click="store.isDark = !store.isDark"
+      icon="mdi-weather-sunny"
       
-   <!-- ></v-btn>-->
-   <!-- <v-btn-->
-   <!-- class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>-->
+    ></v-btn>
+    <v-btn
+    class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
 		
-	<div style="max-width: 400px" class="mx-auto pt-5 " id="container">
+	<div style="max-width: 500px" class="mx-auto pt-5 mb-5" id="container">
 	<h1>Meu perfil</h1>
 	
-  <div class="align-center text-center mt-5">
+  <div class="align-center text-center mt-5 mb-5">
 
-      <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 100px; height: 100px; border-radius: 100%;">
+      <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 95px; height: 95px; border-radius: 100%;">
       <img v-if="store.myObject.photo" class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="store.myObject.photo" />
       <img v-else class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="UserPic" />
       
       
     </div>
 
-    <p style="font-size: 24px;" class="mt-5 font-weight-bold">{{store.myObject.name}}</p>
-  </div>
+    <p style="font-size: 24px;" class="mt-5 mb-2 font-weight-bold">{{store.myObject.name}}</p>
 
+
+  </div>
+ <hr>
   <div>
+<br>
+  <v-card :theme="colorMode" variant="tonal" class=" mb-2">
+    <v-card-text class="d-flex">
+    <span class="mdi mdi-email">{{store.myObject.email}}</span>
+
+    <span v-if="store.myObject.phone" class="mdi mdi-account ml-5">{{store.myObject.phone}}</span>
+
+
+    <v-btn density="compact" style="font-size: 12px;" class=" ml-auto" variant="tonal" icon="mdi mdi-pencil"></v-btn>
+  </v-card-text>
+
+  
+
+</v-card>
+
     <ul>
+
       <li>Histórico de serviços</li>
-      <li>Planos</li>
-      <li>Deslogar</li>
+      <!-- <small>{{user.uid}}</small> -->
+      <v-card variant="tonal" :theme="colorMode" class="px-5 mb-2" v-for="item in list">
+      <template v-slot:text v-if="item.cliente.id == user.uid"  class="d-flex" ><span class="mdi mdi-content-cut mr-auto">{{item.servico.titulo}}</span> <span class="mdi mdi-calendar">{{item.servico.dia}}</span></template>
+      <!-- <li>Planos</li> -->
+    </v-card>
+<!--             <li class="mb-2" :class="cor" @mouseover="this.cor='verde'" @mouseout="this.cor='normal'">Editar informações de contato</li>
+      <li class="mt-2">Deslogar</li> -->
     </ul>
   </div>
 
+<v-card variant="tonal" v-for="item in setHistoric" :theme="colorMode" class="mb-5">
+  <v-card-title>{{item.servico.titulo}}</v-card-title>
+<v-card-text ><span class="mdi mdi-account"></span>{{item.cliente.nome}} <br><span class="mdi mdi-email"></span>{{item.cliente.email}} <br>R${{item.servico.valor}} <br><span class="mdi mdi-calendar"></span>{{item.servico.dia}}</v-card-text>
+<v-card-actions>
+  <v-btn color='white' class="bg-success">Efetuado</v-btn>
+  <v-btn  @click="excluir(item.id)" color='red'>Cancelado</v-btn>
+</v-card-actions>
 
- {{store.myObject}} 
-
-
+</v-card>
 		
 </div>
 </div>
 </template>
 
 <style scoped >
-	.dark {
-  background-color: #363636;
-  color: white;
+
+li{
+  list-style: none;
+  font-weight: 700;
 }
 
-.light {
-  background-color: white;
-  color: #282828;
-}
+ .verde{
+  color: springgreen;
+ }
+
+ .normal{
+  color: white;
+ }
+  
+
+
+
 
 #container {
-	height: 100vh;
+/*	height: 100vh;*/
+
 }
 </style>
 
@@ -73,15 +110,62 @@ import {
   signInWithPopup,
   sendPasswordResetEmail
 } from "firebase/auth";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+  getFirestore
+} from "firebase/firestore";
+import { useFirestore, useCollection, } from "vuefire";
 
+const db = getFirestore(app);
+const historic = collection(db, "agenda")
+const list = useCollection(historic);
 const auth = getAuth(app);
 
 export default{
+
+  computed:{
+    setHistoric(){
+      let servico = this.list
+      let historic = servico.filter(item => item.cliente.id == this.user.uid)
+      let all = servico.filter(item => item)
+      // console.log(localStorage.theme)
+      return all
+    },
+
+    colorMode(){
+      if(this.store.isDark == true){
+        this.mode = "dark"
+        this.store.isDark = true
+        localStorage.setItem('theme', "dark")
+        return 'dark'
+
+      } else{
+        this.mode = "light"
+        this.store.isDark = false
+        localStorage.setItem('theme', "light")
+        return 'light'
+
+      }
+        
+      }
+  },
 
 	setup(){
 		const store = userConfig()
 		return { store }
 	},
+
+  created(){
+    this.verify()
+  }
+  ,
 
 
 
@@ -89,10 +173,42 @@ export default{
 		return {
 			email: '',
 			UserPic: UserPic,
+      cor: 'white',
+      list: list,
+      user: '',
+      mode: 'dark'
 		}
 	},
 
 	methods: {
+    async excluir(id) {
+      // alert('excluir')
+      try {
+        deleteDoc(doc(db, "agenda", id));
+        // alert('excluido')
+      } catch (error) {
+        alert(error);
+      }
+    },
+
+    verify() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid;
+          console.log("logado");
+          this.logado = true;
+          this.user = user
+          // this.store.setMyObject(user)
+          
+          
+        } else {
+          this.logado = false;
+          this.user = false
+        
+        }
+      });
+    },
+
 	redefinirSenha(){
       
         sendPasswordResetEmail(auth, this.email)

@@ -7,17 +7,12 @@
     </template>
   
        <v-card class="mx-auto" style="max-width: 500px;" :class="{ dark: store.isDark, light: !store.isDark }" >
-       		<!-- <v-btn
-        v-if="store.isDark"
-        @click="store.isDark = !store.isDark"
-        icon="mdi-weather-sunny"
-       class="mb-5 mt-5 ml-5"
-      ></v-btn>
-      <v-btn v-else  @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"
-      class="mb-5 mt-5 ml-5"></v-btn> -->
+
       <div class="form">
 
         <h2>Minha Reserva</h2>
+        <small>{{cliente}}</small>
+
 
 
         <v-card class="div1" :class="{ ddiv1: store.isDark, ldiv1: !store.isDark }">
@@ -66,7 +61,7 @@
         variant="outlined"
         class='mt-2'
         
-         v-model="cliente"
+         v-model="getInfo.name"
       ></v-text-field>
 
 <h3 class="mb-2"
@@ -97,8 +92,8 @@
         color="success"
         size="x-large"
         variant="flat"
-        @click="loading = !loading"
-        :href=" 'https://api.whatsapp.com/send?phone=559584260691&text=Ol%C3%A1,%20quero%20agendar%20meu%20corte%20de%20cabelo!%0A%0AServiço:%20' +  myProp.titulo + '%0A%0A'+ dateF + '%0A' + cliente "
+        @click="Confirmar()"
+
       >
         Confirmar
       </v-btn>
@@ -126,9 +121,8 @@ import barberPic from '@/assets/hairstylist.png'
 import { userConfig } from '@/stores/user'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import moment from 'moment';
-
-import { collection, getDocs, doc, query, where, setDoc, updateDoc } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import router from "@/router";
+import { collection, getDocs, doc, query, where, setDoc, updateDoc, addDoc, getFirestore } from "firebase/firestore";
 import { useFirestore, useCollection  } from 'vuefire'
 import { app } from "@/firebase";
 
@@ -149,6 +143,7 @@ const servicos = useCollection(collection(db, 'servicos'))
       props: ['modelValue'],
       emits: ['update:modelValue'],
       loading: false,
+      user: 'Teste'
     }),
     props: {
     myProp: {
@@ -158,15 +153,22 @@ const servicos = useCollection(collection(db, 'servicos'))
   },
 
   computed: {
-        dateF() {
+    dateF() {
      if (this.date){
       return moment(this.date).format("DD/MM/YYYY - hh:mm")
      }
-     
+   },
+   getInfo(){
+    return this.store.myObject
+   },
+   cliente(){
+    return this.store.myObject.name
    }
+
+
+
+
  },
-
-
 
    watch: {
     loading(val) {
@@ -177,6 +179,7 @@ const servicos = useCollection(collection(db, 'servicos'))
   },
 
   methods: {
+
   Editar(){
       // alert(JSON.stringify(this.myProp, null, 2))
       const svc = doc(db, "servicos", this.myProp.id);
@@ -187,6 +190,34 @@ const servicos = useCollection(collection(db, 'servicos'))
     }
     this.dialog = false
      
+    },
+
+    Confirmar(){
+      
+        try {
+          this.loading = true
+          const docRef = addDoc(collection(db, "agenda"), {
+            cliente: {
+              id: this.getInfo.id,
+              nome: this.getInfo.name,
+              email: this.getInfo.email,
+            },
+            servico: {
+              titulo: this.myProp.titulo,
+              valor: this.myProp.valor,
+              dia: this.dateF
+            }
+
+          });
+          window.location.href = `https://api.whatsapp.com/send?phone=559584260691&text=Olá, quero agendar meu corte cabelo! Serviço: ${this.myProp.titulo} ${this.dateF} ${this.cliente}`          
+          // this.loading = false
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          // this.loading = false
+          console.error("Error adding document: ", e);
+          alert(e);
+        }
+    
     }
   }
   }

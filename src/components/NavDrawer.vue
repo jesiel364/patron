@@ -28,7 +28,7 @@
       </v-list>
       <v-divider></v-divider>
       <v-list nav>
-      	<!--<p>{{superUser}}</p>-->
+      	<!-- <p>{{superUser}}</p> -->
         <v-list-item
           prepend-icon="mdi-home"
           :to="{ path: '/' }"
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import router from "@/router";
 import { userConfig } from '@/stores/user'
 import UserMenu from '@/components/UserMenu.vue'
 import { app } from "../firebase";
@@ -92,9 +93,8 @@ import {
   query,
   where,
   orderBy,
+  getFirestore
 } from "firebase/firestore";
-
-import { getFirestore } from "firebase/firestore";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -118,7 +118,7 @@ setup(){
     superUser: false,
   }),
 
-  created() {
+  mounted() {
     // this.getServicos()
     this.verify();
     this.getTheme()
@@ -132,11 +132,28 @@ setup(){
   		}else{
   			this.theme = "light"
   		}
-  	}
+  	},
   }
   ,
 
   methods: {
+
+    async isSuper(id){
+      const collectionRef = collection(db, "users");
+      const q = await query(
+        collectionRef,
+        where("id", "==", id)
+      );
+      const users = await getDocs(q);
+      users.forEach((user) => {
+        const User = user.data()
+        this.store.setMyObject(User)
+        // console.log(this.store.myObject)
+        this.superUser = User.superUser
+      })
+    
+    }
+    ,
   	getTheme(){
   		if(this.store.isDark == true){
   			this.mode = "dark"
@@ -154,8 +171,8 @@ setup(){
           console.log("logado");
           this.logado = true;
           this.user = user
-          
-          this.consulta(uid)
+          // this.store.setMyObject(user)
+          this.isSuper(uid)
           
         } else {
           this.logado = false;
@@ -172,6 +189,10 @@ setup(){
 
           this.logado = false;
           this.user = ''
+          this.superUser = false
+          this.store.setMyObject({})
+          router.push('/login')
+
         })
         .catch((error) => {
           // An error happened.
@@ -179,41 +200,7 @@ setup(){
 
         });
     },
-    
-     async consulta(id) {
-      const collectionRef = collection(db, "users");
 
-      const q = await query(
-        collectionRef,
-        where("id", "==", id)
-        // orderBy('valor', 'asc')
-      );
-
-      const servicos = await getDocs(q);
-      servicos.forEach((srv) => {
-        const data = srv.data()
-        const userId = srv.data().uid
-        this.servicos.push(data)
-        alert(id)
-
-        if (userId == id){
-          this.store.setMyObject(data)
-        	// alert(data.superUser)
-        	if( data.superUser){
-        		alert("superUser")
-        		this.superUser = true
-        		// alert(id)
-        	} else{
-        		this.superUser = false
-        		alert("NoSuperUser")
-        	}
-        } else{
-        	// alert("Não é igual")
-        }
-      });
-
-      
-    },
   },
 };
 </script>
