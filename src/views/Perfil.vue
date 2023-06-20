@@ -9,40 +9,41 @@
       
     ></v-btn>
     <v-btn
-    class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
+    class="mt-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
 		
 	<div style="max-width: 500px" class="mx-auto pt-5 mb-5" id="container">
-	<h1>Meu perfil</h1>
+
 	
-  <div class="align-center text-center mt-5 mb-5">
+  <div class="align-center d-flex mb-5">
 
       <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 95px; height: 95px; border-radius: 100%;">
-      <img v-if="store.myObject.photo" class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="store.myObject.photo" />
+      <img v-if="store.myObject.photo" class="ml-auto mr-auto" style="width: 95%; height: 95%; border-radius: 100%;" :src="store.myObject.photo" />
       <img v-else class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="UserPic" />
       
       
     </div>
+    <div style="width: 70%;">
 
     <p style="font-size: 24px;" class="mt-5 mb-2 font-weight-bold">{{store.myObject.name}}</p>
+      <v-card :theme="colorMode" variant="tonal" class=" mb-2">
+    <v-card-text class="d-flex">
+      <div class="d-inline">
+    <span class="mdi mdi-email">{{store.myObject.email}}</span><br>
 
+    <span v-if="store.myObject.phone" class="mdi mdi-account">{{store.myObject.phone}}</span>
+</div>
+
+    <v-btn density="compact" style="font-size: 12px;" class=" ml-auto" variant="tonal" icon="mdi mdi-pencil"></v-btn>
+  </v-card-text>
+
+</v-card>
+</div>
 
   </div>
  <hr>
   <div>
 <br>
-  <v-card :theme="colorMode" variant="tonal" class=" mb-2">
-    <v-card-text class="d-flex">
-    <span class="mdi mdi-email">{{store.myObject.email}}</span>
 
-    <span v-if="store.myObject.phone" class="mdi mdi-account ml-5">{{store.myObject.phone}}</span>
-
-
-    <v-btn density="compact" style="font-size: 12px;" class=" ml-auto" variant="tonal" icon="mdi mdi-pencil"></v-btn>
-  </v-card-text>
-
-  
-
-</v-card>
 
     <ul>
 
@@ -52,8 +53,8 @@
       <template v-slot:text v-if="item.cliente.id == user.uid"  class="d-flex" ><span class="mdi mdi-content-cut mr-auto">{{item.servico.titulo}}</span> <span class="mdi mdi-calendar">{{item.servico.dia}}</span></template>
       <!-- <li>Planos</li> -->
     </v-card>
-<!--             <li class="mb-2" :class="cor" @mouseover="this.cor='verde'" @mouseout="this.cor='normal'">Editar informações de contato</li>
-      <li class="mt-2">Deslogar</li> -->
+           
+     
     </ul>
   </div>
 
@@ -67,6 +68,8 @@
 
 </v-card>
 		
+
+     <li class="mt-2">Deslogar</li>
 </div>
 </div>
 </template>
