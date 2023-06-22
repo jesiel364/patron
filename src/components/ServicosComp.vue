@@ -1,5 +1,5 @@
 <template>
-   {{servicos}} 
+   
 
   <div v-for="item in servicos" class="servicos mb-3 pb-0">
     <div id="cont-1">
@@ -86,5 +86,44 @@ section {
   justify-content: space-between;
   border-radius: 22px;
   margin-bottom: 16px;
+}
+
+#cont-1 {
+  display: flex;
+  flex-direction: column;
+
+  /* background-color: green; */
+  /* vertical-align: middle; */
+}
+
+#cont-2 {
+  display: flex;
+  /* background-color: green; */
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#valor {
+  /* line-height: 3; */
+  display: flex;
+  margin-top: 10px;
+}
+
+v-btn {
+  display: flex;
+  margin-top: 20px;
+}
+
+#time,
+#title {
+  /* background-color: green; */
+  margin-top: 10px;
+  display: flex;
+}
+
+#time {
+  /* background-color: green; */
+  line-height: 5px;
+  font-size: 10px;
 }
 </style>

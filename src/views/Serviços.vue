@@ -34,7 +34,7 @@
 
         <Suspense resolve="alert('resolved')" fallback="alert('fallback')" pending="alert('pending')">
           <template #default>
-            <Loading />
+            <ServicosComp />
 
             <!--         <div v-for="item in servicos" class="servicos   mb-3 pb-0">
 
@@ -51,7 +51,12 @@
           </div>
         </div> -->
           </template>
-          <template #fallback> Loading </template>
+          <template #fallback> 
+            <div class="text-center">
+            <v-progress-circular
+            indeterminate="true"></v-progress-circular>
+          </div>
+           </template>
         </Suspense>
 
         <messComp :dict="message" />
@@ -67,7 +72,7 @@ import logo_small from "../components/logo_sm.vue";
 import messComp from "../components/messComp.vue";
 import Skeleton from "../components/Skeleton.vue";
 import AgendarComp from "../components/AgendarComp.vue";
-import Loading from "../components/Loading.vue";
+import ServicosComp from "../components/ServicosComp.vue";
 
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
@@ -119,7 +124,7 @@ export default {
     messComp,
     AgendarComp,
     Skeleton,
-    Loading,
+    ServicosComp,
   },
   data: () => ({
     message: {
