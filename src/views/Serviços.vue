@@ -18,7 +18,7 @@
           color="black"
         ></v-btn>
         <div class="divs">
-          <div class="box">
+          <div class="box text-center">
             <logo_small class="text-center mb-5" id="logo" />
           </div>
           <div class="box">

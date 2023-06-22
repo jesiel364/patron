@@ -1,9 +1,11 @@
 <template>
 
 
-  <div>
-    <img id='logo' :src="Logo" alt="Logo do meu aplicativo">
-  </div>
+      <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 250px; height: 250px; border-radius: 100%;">
+      <img class="ml-auto mr-auto" style="width: 250px; height: 250px; border-radius: 100%;" :src="Logo" />
+      
+      
+    </div>
 
 
 
