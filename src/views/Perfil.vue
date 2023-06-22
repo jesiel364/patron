@@ -16,7 +16,7 @@
 	
   <div class="align-center d-flex mb-5">
 
-      <div class="d-flex align-center ml-auto mr-auto" style="background-color: white; width: 95px; height: 95px; border-radius: 100%;">
+      <div class="d-flex align-center ml-auto mr-5" style="background-color: white; width: 95px; height: 95px; border-radius: 100%;">
       <img v-if="store.myObject.photo" class="ml-auto mr-auto" style="width: 95%; height: 95%; border-radius: 100%;" :src="store.myObject.photo" />
       <img v-else class="ml-auto mr-auto" style="width: 90px; height: 90px; border-radius: 100%;" :src="UserPic" />
       
