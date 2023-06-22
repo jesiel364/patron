@@ -1,9 +1,10 @@
 <script>
 import { ref } from "vue";
+
 import { userConfig } from "@/stores/user";
 import addServico from "@/components/addServico.vue";
 import Editar from "@/components/Editar.vue";
-import circularProgress from "@/components/circularProgress.vue";
+import Menu from "@/components/Menu.vue";
 import Users from "@/components/Users.vue";
 import AgendarComp from "@/components/AgendarComp.vue";
 import photoPic from "@/assets/photo-pic.png";
@@ -41,7 +42,7 @@ export default {
     Editar,
     Users,
     AgendarComp,
-    circularProgress
+    Menu
   },
   data() {
     return {
@@ -155,37 +156,28 @@ export default {
         <div v-if="superUser">
         <div v-if="logado" id="container">
 
-          <circularProgress />
+          <!-- <circularProgress /> -->
 
             <div id="div1">
               <h2>Serviços</h2>
            
-              <v-table v-bind:theme="mode"   height='400px'  id="table">
+              <v-table class="rounded" v-bind:theme="mode"   height='400px'  id="table">
                 <thead>
                   <tr>
-                    <!-- <th class="text-left">ID</th> -->
-                    <th class="text-left">Ações</th>
+           
+                    <th class="text-left">Status</th>
                     <th class="text-left">Titulo</th>
                     <th class="text-left">Valor</th>
                     <th class="text-left">Tempo</th>
                     <th class="text-left">Imagem</th>
+                    <th class="text-left">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="item in list" :key="item.id">
-                    <!-- <td>{{ item.id }}</td> -->
-                    <td class="d-flex">
-                      <Editar :my-prop="item" /> 
-                                                        <v-btn
-                        class=" mx-auto mt-4 bg-red"
-                        icon="mdi-delete"
-                        @click="excluir(item.id)"
-                        
-                        
-                        color="red"
-                      ></v-btn>
-                      
-                    </td>
+      
+
+                    <td class=""><v-switch color="white" class="mt-2" inset></v-switch></td>
                     <td>{{ item.titulo }}</td>
                     <td>R${{ item.valor }}</td>
                     <td>{{ item.time }}</td>
@@ -201,9 +193,25 @@ export default {
                       </v-avatar>
                     </td>
                     <td v-else>
-                      <v-avatar color="grey" size="60" rounded="">
+                      <v-avatar color="" size="60" rounded="">
                         <v-img :src="photoNull" cover></v-img>
                       </v-avatar>
+                    </td>
+                    <td class="">
+                      
+<!--                       <Editar :my-prop="item" /> 
+                    
+                    <v-btn
+                        class=" mx-auto mt-4 bg-red"
+                        icon="mdi-delete"
+                        @click="excluir(item.id)"
+                        
+                        
+                        color="red"
+                      ></v-btn> -->
+
+                    <Menu :my-prop="item" />
+                      
                     </td>
                   </tr>
                 </tbody>

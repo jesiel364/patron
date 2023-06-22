@@ -1,14 +1,14 @@
 <template>
   <div id="div1">
     <h2>Usuários</h2>
-    <v-table  v-bind:theme="myProp[1]" id="table">
+    <v-table class="rounded"  v-bind:theme="myProp[1]" id="table">
       <thead>
         <tr>
           <!-- <th class="text-left">ID</th> -->
-          <th class="text-left">UID</th>
+          <!-- <th class="text-left">UID</th> -->
           <th class="text-left">Nome</th>
           <th class="text-left">Email</th>
-          <th class="text-left">Administrado</th>
+          <th class="text-left">Admin</th>
 
           <th class="text-left">Telefone</th>
           <th class="text-left">Foto</th>
@@ -16,9 +16,9 @@
       </thead>
       <tbody>
         <tr v-for="item in myProp[0]">
-          <td>
+<!--           <td>
             <small>{{ item.uid }}</small>
-          </td>
+          </td> -->
           <td>{{ item.name }}</td>
           <td>{{ item.email }}</td>
           <td v-if="item.superUser">✅</td>
@@ -32,7 +32,7 @@
           </td>
 
           <td v-else>
-            <v-avatar color="grey" size="60" rounded="">
+            <v-avatar color="" size="60" rounded="">
               <v-img :src="userPic" cover></v-img>
             </v-avatar>
           </td>

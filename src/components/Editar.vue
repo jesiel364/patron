@@ -1,7 +1,8 @@
 <template>
   <v-dialog v-model="dialog" persistent width="1024">
     <template v-slot:activator="{ props }">
-      <v-btn class="mx-auto mt-4 mr-1 bg-white"  v-bind="props" icon="mdi-pencil"></v-btn>
+      <v-list-item-title v-bind="props" >Editar</v-list-item-title>
+      <!-- <v-btn class="mx-auto mt-4 mr-1 bg-white"  v-bind="props" icon="mdi-pencil"></v-btn> -->
     </template>
     <v-card>
       <v-card-title>
@@ -83,7 +84,7 @@ const servicos = useCollection(collection(db, 'servicos'))
     }),
     props: {
     myProp: {
-      type: String,
+      type: Object,
       required: true
     }
   },

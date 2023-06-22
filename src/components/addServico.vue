@@ -26,6 +26,7 @@
     
     <v-select
   clearable
+  theme="dark"
   v-model="tempo.value.value"
   :error-messages="tempo.errorMessage.value"
   label="Tempo estimado"
@@ -38,6 +39,7 @@
       :error-messages="img.errorMessage.value"
       label="Imagem"
       type='url'
+      placeholder="https://example.com/imagem.png"
       clearable
 
     ></v-text-field>
