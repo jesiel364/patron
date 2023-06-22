@@ -35,7 +35,12 @@
 
         <p id="thead" class="font-weight-black mb-7">Serviços</p>
 
-        <div v-for="item in servicos" class="servicos   mb-3 pb-0">
+<Suspense>
+
+<template #default>
+     <Loading />
+
+<!--         <div v-for="item in servicos" class="servicos   mb-3 pb-0">
 
           <div id="cont-1">
 
@@ -45,13 +50,17 @@
 
           <div id="cont-2">
             <p id="valor" class="font-weight-bold">R${{ item.valor }},00</p>
-            <!-- <v-btn  theme="light"  @click='enviarObjeto({item})' class="ml-8 mt-1 rounded-pill bg-brown" icon><v-icon>mdi-content-cut</v-icon> </v-btn> -->
 
               <AgendarComp :my-prop='item'/>
           </div>
-        </div>
+        </div> -->
 
+</template>
+<template #fallback>
+  Loading
 
+</template>
+</Suspense>
 
         <messComp :dict="message" />
 
@@ -71,14 +80,16 @@ import logo_small from '../components/logo_sm.vue'
 import messComp from '../components/messComp.vue'
 import Skeleton from '../components/Skeleton.vue'
 import AgendarComp from '../components/AgendarComp.vue'
+import Loading from '../components/Loading.vue'
 
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
 import { collection, getDocs, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { useFirestore, useCollection  } from 'vuefire'
-
 const db = getFirestore(app);
-const servicos = useCollection(collection(db, 'servicos'), orderBy('valor'))
+const servicos = await useCollection(collection(db, 'servicos'), orderBy('valor'))
+
+
 
 export default {
 
@@ -114,7 +125,8 @@ export default {
       logo_small,
         messComp,
         AgendarComp,
-        Skeleton
+        Skeleton,
+        Loading
 
     },
     data: () => ({
