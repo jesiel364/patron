@@ -33,19 +33,46 @@ const list = useCollection(servicosCol);
 const users = useCollection(collection(db, "users"));
 
 export default {
+
   computed: {
-    setAtivo() {
-      let ativos = this.ativos;
-      alert(JSON.stringify(ativo))
-      ativos.forEach((item) => {
-        const svc = doc(db, "servicos", item.id);
-        try {
-          updateDoc(svc, { status: true });
-        } catch (error) {
-          alert(error);
-        }
-      });
-      return ativos
+    noAtivo() {
+      // let todos = this.list
+
+      // let ativos = this.ativo
+      // const naoAtivos = todos.filter(x => {
+      //   return JSON.stringify(ativos).indexOf(JSON.stringify(x)) < 0;
+      // });
+      // return naoAtivos
+    }
+  },
+  watch: {
+    ativo(novo) {
+
+      // novo.forEach((item) => {
+      //   if (item.status == false) {
+      //     const svc = doc(db, "servicos", item.id);
+      //     try {
+      //       updateDoc(svc, { status: true });
+      //     } catch (error) {
+      //       alert(error);
+      //     }
+      //   }
+      // });
+      // if (this.noAtivo) {
+      //   this.noAtivo.forEach((item) => {
+      //     if (item.status == true) {
+      //       const svc = doc(db, "servicos", item.id);
+      //       try {
+      //         updateDoc(svc, { status: false });
+      //       } catch (error) {
+      //         alert(error);
+      //       }
+      //     }
+
+      //   });
+      // }
+
+
     },
   },
   setup() {
@@ -72,7 +99,7 @@ export default {
       alert: true,
       alert2: true,
       mode: "dark",
-      ativo: [],
+      ativo: '',
     };
   },
 
@@ -83,6 +110,25 @@ export default {
   },
 
   methods: {
+    setStatus(item) {
+      console.log(item)
+      if (item.status == false) {
+        const svc = doc(db, "servicos", item.id);
+        try {
+          updateDoc(svc, { status: true });
+          
+        } catch (error) {
+          alert(error);
+        }
+      } else {
+        const svc = doc(db, "servicos", item.id);
+        try {
+          updateDoc(svc, { status: false });
+        } catch (error) {
+          alert(error);
+        }
+      }
+    },
     colorMode() {
       if (this.store.isDark == true) {
         this.mode = "dark";
@@ -99,7 +145,7 @@ export default {
           const uid = user.uid;
           this.uid = uid;
           this.consulta(uid);
-          console.log("logado");
+          // console.log("logado");
           this.logado = true;
         } else {
           this.logado = false;
@@ -150,23 +196,9 @@ export default {
 </script>
 
 <template>
-  <div
-    :class="{ dark: store.isDark, light: !store.isDark }"
-    class="wrapper px-5"
-  >
-    <v-btn
-      class="mt-5 mb-5"
-      v-if="store.isDark"
-      @click="store.isDark = !store.isDark"
-      icon="mdi-weather-sunny"
-    ></v-btn>
-    <v-btn
-      class="mt-5 mb-5"
-      v-else
-      @click="store.isDark = !store.isDark"
-      icon="mdi-weather-night"
-      color="black"
-    ></v-btn>
+  <div :class="{ dark: store.isDark, light: !store.isDark }" class="wrapper px-5">
+    <v-btn class="mt-5 mb-5" v-if="store.isDark" @click="store.isDark = !store.isDark" icon="mdi-weather-sunny"></v-btn>
+    <v-btn class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
     <h1 class="pt-3 text-center">Página de administração</h1>
 
     <div v-if="superUser">
@@ -175,16 +207,11 @@ export default {
 
         <div id="div1">
           <h2>Serviços</h2>
-          <h2>{{setAtivo}}</h2>
+          <!-- <small class="bg-warning" v-for="item in noAtivo">{{ item.titulo }} - {{ item.status }}, </small> -->
 
-          <small v-for="item in ativo">{{ item.titulo}} - {{item.status}}, </small>
+          <small class="bg-success" v-for="item in list">{{ item.titulo }} - {{ item.status }}, </small>
 
-          <v-table
-            class="rounded"
-            v-bind:theme="mode"
-            height="400px"
-            id="table"
-          >
+          <v-table class="rounded" v-bind:theme="mode" height="400px" id="table">
             <thead>
               <tr>
                 <th class="text-left">Status</th>
@@ -198,24 +225,16 @@ export default {
             <tbody>
               <tr v-for="item in list" :key="item.id">
                 <td class="">
-                  <v-switch
-                    v-model="ativo"
-                    v-bind:value="item"
-                    color="white"
-                    class="mt-2"
-                    inset
-                  ></v-switch>
+                  <v-switch @click="setStatus(item)" :id="item.titulo" v-model="item.status"  color="white" class="mt-2"
+                    inset></v-switch>
                 </td>
                 <td>{{ item.titulo }}</td>
                 <td>R${{ item.valor }}</td>
                 <td>{{ item.time }}</td>
-                <td
-                  v-if="
-                    item.img != 'undefined' &&
-                    item.img != 'null' &&
-                    item.img != ''
-                  "
-                >
+                <td v-if="item.img != 'undefined' &&
+                  item.img != 'null' &&
+                  item.img != ''
+                  ">
                   <v-avatar color="grey" size="60" rounded="">
                     <v-img :src="item.img" cover></v-img>
                   </v-avatar>
@@ -254,14 +273,7 @@ export default {
       </div>
 
       <div id="d-flex" v-else>
-        <v-alert
-          v-model="alert2"
-          border="start"
-          variant="tonal"
-          close-label="Close Alert"
-          color=""
-          title="Alerta"
-        >
+        <v-alert v-model="alert2" border="start" variant="tonal" close-label="Close Alert" color="" title="Alerta">
           <p>Area restrita a apenas administradores do site.</p>
           <p>
             Se for um usuário <strong>autorizado</strong>, faça o login clicando
@@ -273,14 +285,8 @@ export default {
 
     <div id="" v-else>
       <div>
-        <v-alert
-          v-model="alert"
-          border="start"
-          variant="tonal"
-          close-label="Close Alert"
-          color="alert"
-          title="Acesso não permitido"
-        >
+        <v-alert v-model="alert" border="start" variant="tonal" close-label="Close Alert" color="alert"
+          title="Acesso não permitido">
           <p>Area restrita a apenas administradores do site</p>
           <p>
             Se for um usuário <strong>autorizado</strong>, faça o login clicando
@@ -296,6 +302,7 @@ export default {
 :root {
   --fundo: #363636;
 }
+
 #container {
   min-height: 100vh;
 
@@ -317,21 +324,23 @@ a,
   transition: 0.4s;
 }
 
-.card {
-}
+.card {}
 
 .dark {
   background-color: #363636;
   color: #fafafa;
 }
+
 .light {
   background-color: #fafafa;
   color: #363636;
 }
+
 .tdark {
   background-color: #282828;
   color: white;
 }
+
 .tlight {
   background-color: #eeeeee;
   color: #282828;
@@ -369,6 +378,7 @@ a,
   #container {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+
   .card {
     @apply mr-5 px-5;
   }

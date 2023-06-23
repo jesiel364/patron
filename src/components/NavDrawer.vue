@@ -168,7 +168,7 @@ setup(){
       onAuthStateChanged(auth, (user) => {
         if (user) {
           const uid = user.uid;
-          console.log("logado");
+          // console.log("logado");
           this.logado = true;
           this.user = user
           // this.store.setMyObject(user)
