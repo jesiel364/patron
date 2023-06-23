@@ -6,10 +6,10 @@
       <v-list v-if="user">
           <v-list-item
             
-            v-bind:prepend-avatar="user.photoURL"
-            title="Yda Jean Barber"
-            subtitle="Rua Curió, 575 - São Bento"
-          >
+            v-bind:prepend-avatar="Logo"
+            title="YdaJean Barber"
+            
+          ><small>Rua Curió, 575 - São Bento</small>
             <template v-slot:append>
 
               <UserMenu :myProp='user' />
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import Logo from "@/assets/logo.jpg"
 import router from "@/router";
 import { userConfig } from '@/stores/user'
 import UserMenu from '@/components/UserMenu.vue'
@@ -110,6 +111,7 @@ setup(){
     UserMenu
   },
   data: () => ({
+    Logo: Logo,
     drawer: null,
     logado: false,
     user: '',

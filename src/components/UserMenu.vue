@@ -18,20 +18,28 @@
 
       <v-card min-width="300">
         <v-list>
+          <!-- {{ store.myObject }} -->
           <v-list-item
-            prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-           :title="userName"
-          :subtitle="userEmail"
+            v-if="!store.myObject.photo"
+            :prepend-avatar="Pic"
+           :title="store.myObject.name"
+          :subtitle="store.myObject.email"
+          ></v-list-item>
+          <v-list-item
+            v-else
+            :prepend-avatar="store.myObject.photo"
+           :title="store.myObject.name"
+          :subtitle="store.myObject.email"
           >
 
-            <template v-slot:append>
+            <!-- <template v-slot:append>
               <v-btn
                 variant="text"
                 :class="fav ? 'text-green' : ''"
                 icon="mdi-heart"
                 @click="fav = !fav"
               ></v-btn>
-            </template>
+            </template> -->
           </v-list-item>
         </v-list>
 
@@ -39,14 +47,14 @@
       
 
         <v-list>
-          <v-list-item>
+          <!-- <v-list-item>
             <v-switch
               v-model="message"
               color="green"
               label="Ativar menssagens"
               hide-details
             ></v-switch>
-          </v-list-item>
+          </v-list-item> -->
 
           <v-list-item>
             <v-switch
@@ -82,7 +90,7 @@
 
 <script>
 import { userConfig } from '@/stores/user'
-
+import Pic from "@/assets/user.png"
   export default {
 
       setup() {
@@ -97,6 +105,7 @@ import { userConfig } from '@/stores/user'
       dark: true,
       userName: 'user',
       userEmail: 'email',
+      Pic: Pic
 
 
     }),
