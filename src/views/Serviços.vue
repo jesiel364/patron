@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import Logo from "@/assets/logo.png";
 import { userConfig } from "@/stores/user";
 import logo_small from "../components/logo_sm.vue";
 import messComp from "../components/messComp.vue";
