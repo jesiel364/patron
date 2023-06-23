@@ -209,7 +209,7 @@ export default {
           <h2>Serviços</h2>
           <!-- <small class="bg-warning" v-for="item in noAtivo">{{ item.titulo }} - {{ item.status }}, </small> -->
 
-          <small class="bg-success" v-for="item in list">{{ item.titulo }} - {{ item.status }}, </small>
+          <!--<small class="bg-success" v-for="item in list">{{ item.titulo }} - {{ item.status }}, </small>-->
 
           <v-table class="rounded" v-bind:theme="mode" height="400px" id="table">
             <thead>
@@ -225,7 +225,7 @@ export default {
             <tbody>
               <tr v-for="item in list" :key="item.id">
                 <td class="">
-                  <v-switch @click="setStatus(item)" :id="item.titulo" v-model="item.status"  color="white" class="mt-2"
+                  <v-switch @click="setStatus(item)" :id="item.titulo" v-model="item.status"  color="green" class="mt-2"
                     inset></v-switch>
                 </td>
                 <td>{{ item.titulo }}</td>
@@ -235,7 +235,7 @@ export default {
                   item.img != 'null' &&
                   item.img != ''
                   ">
-                  <v-avatar color="grey" size="60" rounded="">
+                  <v-avatar theme="success" size="60" rounded="">
                     <v-img :src="item.img" cover></v-img>
                   </v-avatar>
                 </td>
