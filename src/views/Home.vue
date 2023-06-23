@@ -2,7 +2,7 @@
   <v-container class='' id='container'>
     <div class="mx-auto mb-0" id="frame">
     <v-card-text class='' id='title' theme='light'>
-   <h1>   Yda Jean BarberShop </h1> 
+   <h1>   YdaJean BarberShop </h1> 
 
    <h2 class="text-center mt-1" id='sub'>Expert em serviços de barba e cabelo</h2>
 
@@ -86,7 +86,7 @@ export default {
 /*background-color: RED;*/
 
 font-family: 'Karantina';
-font-style: normal;
+/* font-style: italic; */
 font-weight: 700;
 font-size: 75px;
 /*line-height: 65px;*/

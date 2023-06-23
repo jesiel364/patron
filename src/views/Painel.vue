@@ -111,7 +111,7 @@ export default {
 
   methods: {
     setStatus(item) {
-      console.log(item)
+      // console.log(item)
       if (item.status == false) {
         const svc = doc(db, "servicos", item.id);
         try {

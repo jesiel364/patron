@@ -1,8 +1,9 @@
 <template>
-   
+  
+  <!-- <small >{{ ativos }}</small> -->
 
-  <div v-for="item in servicos" class="servicos mb-3 pb-0">
-  	<div v-if="item.status">
+  <div v-for="item in ativos" class="servicos mb-3 pb-0">
+ 
     <div id="cont-1">
       <p class="font-weight-bold" id="title">{{ item.titulo }}</p>
       <p class="text-subtitle-1" id="time">{{ item.time }}</p>
@@ -14,7 +15,7 @@
       <AgendarComp :my-prop="item" />
     </div>
   </div>
-  </div>
+ 
 </template>
 
 <script>
@@ -38,6 +39,15 @@ const db = getFirestore(app);
 
 
 export default {
+  computed:{
+    ativos(){
+      const ativos = this.servicos.filter(item => 
+        item.status == true
+      )
+      return ativos
+    }
+  },
+
   async setup() {
 const servicos = await useCollection(
   collection(db, "servicos"))
