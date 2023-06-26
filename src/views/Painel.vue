@@ -254,7 +254,7 @@ export default {
         </div>
 
         <div id="div2" class="">
-          <addServico />
+          <addServico :my-Prop='store.isDark' />
         </div>
 
         <div id=" " class="card mt-5">
