@@ -33,7 +33,7 @@
     <span v-if="store.myObject.phone" class="mdi mdi-account">{{store.myObject.phone}}</span>
 </div>
 
-    <v-btn density="compact" style="font-size: 12px;" class=" ml-auto" variant="tonal" icon="mdi mdi-pencil"></v-btn>
+<editarPerfil :my-prop="store.myObject" />
   </v-card-text>
 
 </v-card>
@@ -102,6 +102,7 @@ li{
 
 <script>
 import UserPic from "@/assets/user.png"
+import editarPerfil from "../components/editarPerfil.vue";
 import { userConfig } from "@/stores/user";
 import { app } from "../firebase";
 import {
@@ -134,6 +135,9 @@ const auth = getAuth(app);
 
 export default{
 
+  components:{
+    editarPerfil
+  },
   computed:{
     setHistoric(){
       let servico = this.list

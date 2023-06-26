@@ -35,45 +35,16 @@ const users = useCollection(collection(db, "users"));
 export default {
 
   computed: {
-    noAtivo() {
-      // let todos = this.list
-
-      // let ativos = this.ativo
-      // const naoAtivos = todos.filter(x => {
-      //   return JSON.stringify(ativos).indexOf(JSON.stringify(x)) < 0;
-      // });
-      // return naoAtivos
+    theme(){
+      if (this.store.isDark) {
+        return 'dark'
+      } else{
+        return 'light'
+      }
     }
   },
   watch: {
-    ativo(novo) {
 
-      // novo.forEach((item) => {
-      //   if (item.status == false) {
-      //     const svc = doc(db, "servicos", item.id);
-      //     try {
-      //       updateDoc(svc, { status: true });
-      //     } catch (error) {
-      //       alert(error);
-      //     }
-      //   }
-      // });
-      // if (this.noAtivo) {
-      //   this.noAtivo.forEach((item) => {
-      //     if (item.status == true) {
-      //       const svc = doc(db, "servicos", item.id);
-      //       try {
-      //         updateDoc(svc, { status: false });
-      //       } catch (error) {
-      //         alert(error);
-      //       }
-      //     }
-
-      //   });
-      // }
-
-
-    },
   },
   setup() {
     const store = userConfig();
@@ -211,14 +182,14 @@ export default {
 
           <!--<small class="bg-success" v-for="item in list">{{ item.titulo }} - {{ item.status }}, </small>-->
 
-          <v-table class="rounded" v-bind:theme="mode" height="400px" id="table">
+          <v-table class="rounded" v-bind:theme="theme" height="400px" id="table">
             <thead>
               <tr>
                 <th class="text-left">Status</th>
                 <th class="text-left">Titulo</th>
+                <th class="text-left">Imagem</th>
                 <th class="text-left">Valor</th>
                 <th class="text-left">Tempo</th>
-                <th class="text-left">Imagem</th>
                 <th class="text-left">Ações</th>
               </tr>
             </thead>
@@ -229,8 +200,6 @@ export default {
                     inset></v-switch>
                 </td>
                 <td>{{ item.titulo }}</td>
-                <td>R${{ item.valor }}</td>
-                <td>{{ item.time }}</td>
                 <td v-if="item.img != 'undefined' &&
                   item.img != 'null' &&
                   item.img != ''
@@ -244,6 +213,8 @@ export default {
                     <v-img :src="photoNull" cover></v-img>
                   </v-avatar>
                 </td>
+                <td>R${{ item.valor }}</td>
+                <td>{{ item.time }}</td>
                 <td class="">
 
                   <Menu :my-prop="item" />
@@ -258,7 +229,7 @@ export default {
         </div>
 
         <div id=" " class="card mt-5">
-          <Users :my-prop="[users, mode]" />
+          <Users :my-prop="[users, store.isDark]" />
         </div>
       </div>
 

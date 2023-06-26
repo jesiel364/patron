@@ -1,12 +1,13 @@
 <template>
   <div id="div1">
     <h2>Usuários</h2>
-    <v-table class="rounded"  v-bind:theme="myProp[1]" id="table">
+ 
+    <v-table class="rounded"  :theme="theme" id="table">
       <thead>
         <tr>
           <!-- <th class="text-left">ID</th> -->
           <!-- <th class="text-left">UID</th> -->
-          <th class="text-left">Nome</th>
+          <th  class="text-left">Nome</th>
           <th class="text-left">Email</th>
           <th class="text-left">Admin</th>
 
@@ -21,8 +22,8 @@
           </td> -->
           <td>{{ item.name }}</td>
           <td>{{ item.email }}</td>
-          <td v-if="item.superUser">✅</td>
-          <td v-else>❌</td>
+          <td v-if="item.superUser"><span class="mdi mdi-check"></span></td>
+          <td v-else></td>
           <td>{{ item.phone }}</td>
           <td v-if="item.photo">
           
@@ -46,6 +47,16 @@
 import userPic from '@/assets/user.png'
 
 export default {
+  computed:{
+    theme(){
+      if (this.myProp[1]) {
+        return 'dark'
+      } else{
+        return 'light'
+      }
+    }
+  },
+
   props: {
     myProp: {
       type: Array,
