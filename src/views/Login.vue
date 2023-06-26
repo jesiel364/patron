@@ -30,9 +30,12 @@
           <strong class="text-red">{{errorMessage}}</strong>
 
           <v-text-field
+          class="mt-2"
             v-model="email.value.value"
             :error-messages="email.errorMessage.value"
             label="E-mail"
+            variant="outlined"
+            prepend-inner-icon="mdi mdi-email"
           ></v-text-field>
 
           <v-text-field
@@ -40,7 +43,11 @@
             :counter="0"
             :error-messages="pwd.errorMessage.value"
             label="Senha"
-            type="password"
+            :type="password"
+            variant="outlined"
+            prepend-inner-icon="mdi mdi-lock"
+            @click:append-inner="show = !show"
+            :append-inner-icon="show ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
           ></v-text-field>
 
           <v-container class="w-100 m-0 px-0">
@@ -125,7 +132,16 @@ const auth = getAuth(app);
 
 
 export default {
-
+ 
+ computed: {
+ 	password(){
+ 		if(this.show){
+ 			return 'text'
+ 		} else{
+ 			return 'password'
+ 		}
+ 	}
+ },
 
   components: {
     AlertComp,
@@ -141,7 +157,8 @@ export default {
       // alerta: { message: "teste", dialog: true },
       isDark: true ,
       loading: false,
-      resetLink: ''
+      resetLink: '',
+      show: false,
     };
   },
   methods: {

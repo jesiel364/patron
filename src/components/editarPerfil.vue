@@ -16,7 +16,7 @@
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field variant="outlined" label="Nome" v-model="myProp.name" required clearable></v-text-field>
                             <v-text-field variant="outlined" label="Telefone" v-model="myProp.phone" required clearable></v-text-field>
-                            <v-file-input class="mt-2" label="Enviar foto" variant="outlined" prepend-icon="mdi-camera"></v-file-input>
+                            <v-file-input class="mt-2" label="Enviar foto" variant="outlined" prepend-inner-icon="mdi-camera"></v-file-input>
                             <p></p>
                         </v-col>
 
