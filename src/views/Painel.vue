@@ -245,16 +245,6 @@ export default {
                   </v-avatar>
                 </td>
                 <td class="">
-                  <!--                       <Editar :my-prop="item" /> 
-                    
-                    <v-btn
-                        class=" mx-auto mt-4 bg-red"
-                        icon="mdi-delete"
-                        @click="excluir(item.id)"
-                        
-                        
-                        color="red"
-                      ></v-btn> -->
 
                   <Menu :my-prop="item" />
                 </td>

@@ -264,6 +264,7 @@ html {}
   display: flex;
   align-items: center;
   margin-bottom: 0;
+  
 }
 
 #container{
@@ -281,11 +282,14 @@ html {}
   font-family: 'PT Sans', sans-serif;
   align-items: center;
   /* display: flex; */
-  
   padding: 20px;
   /* margin-top: 64px; */
   height: 100%;
 
+}
+
+.form::-webkit-scrollbar-track {
+  background: orange;
 }
 
 h2 {

@@ -2,9 +2,17 @@
   
   <!-- <small >{{ ativos }}</small> -->
 
-  <div v-for="item in ativos" class="servicos mb-3 pb-0">
- 
+  <div v-for="item in ativos" class="servicos mb-3 pt-0 pb-0">
+    
+  <div >
+    <v-avatar class="mx-0 px-0" theme="success" size="60" rounded="">
+        <v-img :src="item.img" cover></v-img>
+      </v-avatar>
+</div>
+
     <div id="cont-1">
+
+
       <p class="font-weight-bold" id="title">{{ item.titulo }}</p>
       <p class="text-subtitle-1" id="time">{{ item.time }}</p>
     </div>
@@ -94,6 +102,7 @@ section {
 
 .servicos {
   /* background-color:grey; */
+
   display: flex;
   justify-content: space-between;
   border-radius: 22px;
@@ -101,11 +110,13 @@ section {
 }
 
 #cont-1 {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
-
+ width: 100%;
   /* background-color: green; */
   /* vertical-align: middle; */
+  padding-left: 20px;
+  margin-bottom: 0;
 }
 
 #cont-2 {
@@ -113,12 +124,14 @@ section {
   /* background-color: green; */
   flex-direction: row;
   justify-content: space-between;
+  /* padding-left: 20px; */
 }
 
 #valor {
-  /* line-height: 3; */
+  line-height: 4.5;
   display: flex;
-  margin-top: 10px;
+  /* padding-top: 10px; */
+  
 }
 
 v-btn {
@@ -126,16 +139,11 @@ v-btn {
   margin-top: 20px;
 }
 
-#time,
-#title {
-  /* background-color: green; */
-  margin-top: 10px;
-  display: flex;
-}
 
 #time {
   /* background-color: green; */
   line-height: 5px;
   font-size: 10px;
+  padding-top: 10px;
 }
 </style>
