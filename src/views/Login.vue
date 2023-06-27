@@ -334,6 +334,13 @@ export default {
 </script>
 
 <style scoped>
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .dark {
   background-color: #363636 ;
   color: white;
