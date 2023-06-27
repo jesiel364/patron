@@ -60,7 +60,9 @@
 
 <v-card variant="tonal" v-for="item in setHistoric" :theme="colorMode" class="mb-5">
   <v-card-title>{{item.servico.titulo}}</v-card-title>
-<v-card-text ><span class="mdi mdi-account"></span>{{item.cliente.nome}} <br><span class="mdi mdi-email"></span>{{item.cliente.email}} <br>R${{item.servico.valor}} <br><span class="mdi mdi-calendar"></span>{{item.servico.dia}}</v-card-text>
+<v-card-text >R${{item.servico.valor}} <br><span class="mdi mdi-calendar"></span>{{item.servico.dia}}</v-card-text>
+
+<small v-for="item in buscaImg">{{ item }}</small>
 <v-card-actions>
   <v-btn color='white' class="bg-success">Efetuado</v-btn>
   <v-btn  @click="excluir(item.id)" color='red'>Cancelado</v-btn>
@@ -130,6 +132,8 @@ import { useFirestore, useCollection, } from "vuefire";
 
 const db = getFirestore(app);
 const historic = collection(db, "agenda")
+const servicosCol = collection(db, "servicos")
+const servicos = useCollection(servicosCol);
 const list = useCollection(historic);
 const auth = getAuth(app);
 
@@ -139,6 +143,35 @@ export default{
     editarPerfil
   },
   computed:{
+    buscaImg() {
+      let agenda = this.list
+      let servico = this.servicos
+      let res = []
+
+      let servicoTitle = agenda.filter(item => {
+        servico.filter(el => {
+          let x = (el.titulo == item.servico.titulo)
+          if(!x){
+            console.log()
+          }else{
+            console.log('x')
+          }
+        })
+
+      })
+      let img = servico.filter(item => {
+        let titulo = agenda.forEach(elemento => {
+          let res = elemento.servico.titulo
+          return res
+          
+        })
+        return item.titulo.match(titulo)
+        
+      
+      })  
+      return res
+    },
+
     setHistoric(){
       let servico = this.list
       let historic = servico.filter(item => item.cliente.id == this.user.uid)
@@ -183,6 +216,7 @@ export default{
 			UserPic: UserPic,
       cor: 'white',
       list: list,
+      servicos: servicos,
       user: '',
       mode: 'dark'
 		}
