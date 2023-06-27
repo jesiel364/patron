@@ -9,7 +9,7 @@
       
     ></v-btn>
     <v-btn
-    class="mt-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
+    class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
 		
 	<div style="max-width: 500px" class="mx-auto pt-5 mb-5" id="container">
 
@@ -143,8 +143,8 @@ export default{
       let servico = this.list
       let historic = servico.filter(item => item.cliente.id == this.user.uid)
       let all = servico.filter(item => item)
-      // console.log(localStorage.theme)
-      return all
+      console.log(all)
+      return historic
     },
 
     colorMode(){

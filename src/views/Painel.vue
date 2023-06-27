@@ -7,6 +7,7 @@ import Editar from "@/components/Editar.vue";
 import Menu from "@/components/Menu.vue";
 import Users from "@/components/Users.vue";
 import AgendarComp from "@/components/AgendarComp.vue";
+import Historico from "@/components/Historico.vue";
 import photoPic from "@/assets/photo-pic.png";
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase";
@@ -56,6 +57,7 @@ export default {
     Users,
     AgendarComp,
     Menu,
+    Historico
   },
   data() {
     return {
@@ -172,11 +174,13 @@ export default {
     <v-btn class="mt-5 mb-5" v-else @click="store.isDark = !store.isDark" icon="mdi-weather-night" color="black"></v-btn>
     <h1 class="pt-3 text-center">Página de administração</h1>
 
-    <div v-if="superUser">
-      <div v-if="logado" id="container">
-        <!-- <circularProgress /> -->
 
-        <div id="div1">
+    <div v-if="superUser">
+      <v-divider class="my-5"></v-divider>
+      <div v-if="logado" id="container">
+        <Historico />
+<v-divider class="my-5 "></v-divider>
+        <div class="" id="div1">
           <h2>Serviços</h2>
           <!-- <small class="bg-warning" v-for="item in noAtivo">{{ item.titulo }} - {{ item.status }}, </small> -->
 
@@ -224,11 +228,14 @@ export default {
           </v-table>
         </div>
 
-        <div id="div2" class="">
+        
+        <div id="div2" >
+  <v-divider class="my-5 "></v-divider>
           <addServico :my-Prop='store.isDark' />
         </div>
 
-        <div id=" " class="card mt-5">
+        <div id=" " class="card mt-5 mb-5">
+          <v-divider class="my-5 "></v-divider>
           <Users :my-prop="[users, store.isDark]" />
         </div>
       </div>

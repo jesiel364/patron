@@ -1,11 +1,18 @@
-<tamplate>
+<template>
 
 
+<h3>Histórico de serviços</h3>
+<v-card variant="tonal" v-for="item in setHistoric" :theme="colorMode" class="mb-5">
+  <v-card-title>{{item.servico.titulo}}</v-card-title>
+<v-card-text ><span class="mdi mdi-account"></span>{{item.cliente.nome}} <br><span class="mdi mdi-email"></span>{{item.cliente.email}} <br>R${{item.servico.valor}} <br><span class="mdi mdi-calendar"></span>{{item.servico.dia}}</v-card-text>
+<v-card-actions>
+  <v-btn color='white' class="bg-success">Efetuado</v-btn>
+  <v-btn  @click="excluir(item.id)" color='red'>Cancelado</v-btn>
+</v-card-actions>
 
-<!--{{store}}-->
-<!--{{setHistoric}}-->
+</v-card>
 	
-</tamplate>
+</template>
 <script>
 import { userConfig } from "@/stores/user";
 import { app } from "../firebase";
@@ -46,7 +53,8 @@ export default{
 	data(){
 		return {
 			user: "",
-			mode: 'dark'
+			mode: 'dark',
+      list: list,
 		}
 	},
 	
@@ -79,6 +87,16 @@ export default{
   },
   
   methods:{
+
+    async excluir(id) {
+      // alert('excluir')
+      try {
+        deleteDoc(doc(db, "agenda", id));
+        // alert('excluido')
+      } catch (error) {
+        alert(error);
+      }
+    },
   	
     verify() {
       onAuthStateChanged(auth, (user) => {
